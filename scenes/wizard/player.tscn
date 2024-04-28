@@ -1,13 +1,35 @@
-[gd_scene load_steps=13 format=3 uid="uid://iymgug8qim0t"]
+[gd_scene load_steps=14 format=3 uid="uid://iymgug8qim0t"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_v5kjs"]
+[ext_resource type="PackedScene" uid="uid://b3nijkc0o0ptt" path="res://scenes/wizard/wizard.tscn" id="2_048if"]
 [ext_resource type="FontFile" uid="uid://xs7xxon56nsf" path="res://assets/fonts/PossumSaltareNF.otf" id="2_ftacq"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mlymq"]
-height = 1.5
+[sub_resource type="GDScript" id="GDScript_vq6al"]
+resource_name = "SpringArmPlayer"
+script/source = "extends SpringArm3D
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vyqu7"]
-height = 1.5
+var sensitivity = 0.5
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	set_as_top_level(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	add_excluded_object($\"..\")
+
+func _unhandled_input(event: InputEvent):
+	if event is InputEventMouseMotion:
+		rotation_degrees.x -= event.relative.y * sensitivity
+		rotation_degrees.x = clamp(rotation_degrees.x,-90.0,30.0)
+		rotation_degrees.y -= event.relative.x * sensitivity
+		rotation_degrees.y = wrapf(rotation_degrees.y,0.0,360.0)
+		
+func _physics_process(_delta):
+	position = $\"..\".position + Vector3(0,1.524,0)
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mlymq"]
+radius = 0.493673
+height = 1.67188
 
 [sub_resource type="GDScript" id="GDScript_e12yi"]
 resource_name = "PlayerMachine"
@@ -16,6 +38,8 @@ script/source = "extends StateMachine
 @onready var player : Player = $\"..\"
 
 func physics(_delta) :
+	player.spring_arm_rot = player.spring_arm_3d.rotation.y
+	player.player_body.rotation.y = lerp_angle(player.player_body.rotation.y, player.spring_arm_rot + PI/2 ,_delta * player.angular_acceleration)
 	current_state.physics(_delta)
 
 func input(event : InputEvent):
@@ -35,7 +59,7 @@ script/source = "extends State
 @onready var player : Player = $\"../..\"
 
 func physics(_delta):
-	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta/4)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta/4)
 	player.velocity.y = lerpf(player.velocity.y, player.falling_velocity, player.vertical_acceleration*_delta)
@@ -58,7 +82,7 @@ script/source = "extends State
 @onready var player : Player = $\"../..\"
 
 func physics(_delta):
-	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed/2, player.acceleration*_delta/4)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed/2, player.acceleration*_delta/4)
 	player.velocity.y = lerpf(player.velocity.y, player.gliding_velocity, player.gliding_acceleration*_delta)
@@ -85,7 +109,7 @@ func input(event : InputEvent):
 		machine.change_state_from_name(\"JumpCharge\")
 
 func physics(_delta) -> void :
-	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta)
 	player.velocity.y = 0
@@ -108,7 +132,7 @@ func physics(_delta) -> void :
 func input(event):
 	if event.is_action_released(\"jump\"):
 		player.velocity.y = player.jump_height
-		player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+		player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 		player.velocity.x = player.flat_direction.x * player.speed
 		player.velocity.z = player.flat_direction.y * player.speed
 		machine.change_state_from_name(\"Air\")
@@ -138,11 +162,20 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_v5kjs")
 acceleration = 5.0
 
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.585203, 0)
+spring_length = 5.0
+script = SubResource("GDScript_vq6al")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+current = true
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0578742, 0)
 shape = SubResource("CapsuleShape3D_mlymq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_vyqu7")
+[node name="wizard" parent="." instance=ExtResource("2_048if")]
+transform = Transform3D(0.3, 0, -8.88178e-16, 0, 0.3, 0, 8.88178e-16, 0, 0.3, 0, -0.434112, 0)
 
 [node name="PlayerMachine" type="Node" parent="."]
 script = SubResource("GDScript_e12yi")

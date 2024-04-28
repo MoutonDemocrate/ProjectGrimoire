@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3nijkc0o0ptt"]
+
+[ext_resource type="PackedScene" uid="uid://ce10h3cc2m5ej" path="res://scenes/wizard/wizard.blend" id="1_nltcd"]
+
+[node name="wizard" instance=ExtResource("1_nltcd")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(0.707107, 0, -0.707107, 0)
+bones/0/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/6/rotation = Quaternion(0, 0.707107, 0.707107, 0)

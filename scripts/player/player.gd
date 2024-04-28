@@ -18,12 +18,19 @@ class_name Player
 @export var gliding_velocity : float = -10
 @export var gliding_acceleration : float = 10  
 
+@export_group("Cosmetic Constants")
+@export var angular_acceleration : float = 10
 
-
+@onready var player_body : Node3D = $wizard
+@onready var spring_arm_3d : SpringArm3D = $SpringArm3D
 @onready var machine : StateMachine = $PlayerMachine
 
 var direction : Vector3 = Vector3.ZERO
 var flat_direction : Vector2 = Vector2.ZERO
+
+var spring_arm_rot : float
+
+var target : Node3D
 
 func remove_spell_in_slot(slot : int) :
 	if len(spells) >= slot - 1 :
