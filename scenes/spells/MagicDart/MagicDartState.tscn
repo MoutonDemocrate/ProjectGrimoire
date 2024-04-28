@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ko88rdoktyv4"]
+
+[sub_resource type="GDScript" id="GDScript_i8pui"]
+resource_name = "MagicDartState"
+script/source = "extends State
+
+@onready var player : Player
+
+var cast_slot : int
+
+func entered(old_state):
+	print(\"Cast : Magic Dart\")
+	player.remove_spell_in_slot(cast_slot)
+	machine.change_state(old_state)
+	machine.delete_state(self)
+"
+
+[node name="MagicDartState" type="Node"]
+script = SubResource("GDScript_i8pui")

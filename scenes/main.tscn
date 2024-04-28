@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwj0nb8aiow10"]
+
+[ext_resource type="PackedScene" uid="uid://iymgug8qim0t" path="res://scenes/wizard/player.tscn" id="1_eujhu"]
+[ext_resource type="Texture2D" uid="uid://c3ywjhmvh4607" path="res://assets/hdri/hdr.png" id="2_2w81d"]
+
+[sub_resource type="Gradient" id="Gradient_22eyk"]
+offsets = PackedFloat32Array(0, 0.191489)
+colors = PackedColorArray(0.5, 0.5, 0.5, 1, 0.55, 0.55, 0.55, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_okyjg"]
+noise_type = 2
+seed = 1860
+frequency = 0.0308
+fractal_type = 2
+fractal_lacunarity = 1.975
+fractal_gain = 0.38
+fractal_weighted_strength = 0.51
+cellular_distance_function = 2
+cellular_return_type = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ym8bf"]
+color_ramp = SubResource("Gradient_22eyk")
+noise = SubResource("FastNoiseLite_okyjg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_28fwu"]
+metallic = 1.0
+metallic_specular = 0.66
+roughness = 0.11
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_ym8bf")
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cvy3h"]
+lightmap_size_hint = Vector2i(27, 27)
+material = SubResource("StandardMaterial3D_28fwu")
+size = Vector2(5, 5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5yiqt"]
+points = PackedVector3Array(2.53869, 0.039667, 2.53869, -2.53869, -0.039667, -2.53869, -2.53869, 0.039667, -2.53869, 2.53869, -0.039667, -2.53869, -2.53869, -0.039667, 2.53869, -2.53869, 0.039667, 2.53869, 2.53869, 0.039667, -2.53869, 2.53869, -0.039667, 2.53869)
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_74qeb"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_p0h6j"]
+panorama = ExtResource("2_2w81d")
+
+[sub_resource type="Sky" id="Sky_iproc"]
+sky_material = SubResource("PanoramaSkyMaterial_p0h6j")
+radiance_size = 1
+
+[sub_resource type="Environment" id="Environment_41bqt"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_iproc")
+sky_rotation = Vector3(0, 0, 3.14159)
+glow_enabled = true
+
+[node name="main" type="Node"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Terrain" type="GridMap" parent="World"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
+mesh = SubResource("PlaneMesh_cvy3h")
+skeleton = NodePath("../../Terrain")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_5yiqt")
+
+[node name="TestPlayer" parent="." instance=ExtResource("1_eujhu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.960792, 0)
+acceleration = 10.0
+gliding_velocity = -1.0
+
+[node name="SpringArm3D" type="SpringArm3D" parent="TestPlayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
+shape = SubResource("SeparationRayShape3D_74qeb")
+spring_length = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="TestPlayer/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+fov = 102.4
+near = 0.039
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_41bqt")

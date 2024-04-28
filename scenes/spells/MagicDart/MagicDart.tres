@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=4 format=3 uid="uid://dvenp7rdhtk6a"]
+
+[ext_resource type="Texture2D" uid="uid://b2q4sh8kh5tmk" path="res://assets/textures/spells/icons/Magic_dart.png" id="1_7t3vh"]
+[ext_resource type="Script" path="res://scripts/spells/spell.gd" id="2_uisc4"]
+[ext_resource type="PackedScene" uid="uid://ko88rdoktyv4" path="res://scenes/spells/MagicDart/MagicDartState.tscn" id="3_dbxoi"]
+
+[resource]
+script = ExtResource("2_uisc4")
+name = "Arcane Dart"
+icon = ExtResource("1_7t3vh")
+cost = 1
+damage = 1
+duration = 0.0
+description = "Launches a small, homing dart on the target."
+state_scene = ExtResource("3_dbxoi")

@@ -1,0 +1,209 @@
+[gd_scene load_steps=13 format=3 uid="uid://iymgug8qim0t"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_v5kjs"]
+[ext_resource type="FontFile" uid="uid://xs7xxon56nsf" path="res://assets/fonts/PossumSaltareNF.otf" id="2_ftacq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mlymq"]
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vyqu7"]
+height = 1.5
+
+[sub_resource type="GDScript" id="GDScript_e12yi"]
+resource_name = "PlayerMachine"
+script/source = "extends StateMachine
+
+@onready var player : Player = $\"..\"
+
+func physics(_delta) :
+	current_state.physics(_delta)
+
+func input(event : InputEvent):
+	if event.is_action(\"cast1\") :
+		if len(player.spells) >= 1 :
+			var state : State = add_state(player.spells[0].state_scene.instantiate())
+			state.player = player
+			state.cast_slot = 1
+			change_state(state)
+	current_state.input(event)
+"
+
+[sub_resource type="GDScript" id="GDScript_20aso"]
+resource_name = "AirState"
+script/source = "extends State
+
+@onready var player : Player = $\"../..\"
+
+func physics(_delta):
+	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta/4)
+	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta/4)
+	player.velocity.y = lerpf(player.velocity.y, player.falling_velocity, player.vertical_acceleration*_delta)
+	player.move_and_slide()
+	
+	if Input.is_action_pressed(\"jump\"):
+		machine.change_state_from_name(\"Glide\")
+	
+	if player.is_on_floor() :
+		machine.change_state_from_name(\"Moving\")
+
+func input(event):
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_dxjjn"]
+resource_name = "GlideState"
+script/source = "extends State
+
+@onready var player : Player = $\"../..\"
+
+func physics(_delta):
+	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed/2, player.acceleration*_delta/4)
+	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed/2, player.acceleration*_delta/4)
+	player.velocity.y = lerpf(player.velocity.y, player.gliding_velocity, player.gliding_acceleration*_delta)
+	player.move_and_slide()
+	
+	if not Input.is_action_pressed(\"jump\"):
+		machine.change_state_from_name(\"Air\")
+		
+	if player.is_on_floor() :
+		machine.change_state_from_name(\"Moving\")
+
+func input(event):
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_yi5eu"]
+resource_name = "MovingState"
+script/source = "extends State
+
+@onready var player : Player = $\"../..\"
+
+func input(event : InputEvent):
+	if event.is_action_pressed(\"jump\") :
+		machine.change_state_from_name(\"JumpCharge\")
+
+func physics(_delta) -> void :
+	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta)
+	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta)
+	player.velocity.y = 0
+	player.move_and_slide()
+	
+	if not player.is_on_floor() :
+		machine.change_state_from_name(\"Air\")
+"
+
+[sub_resource type="GDScript" id="GDScript_6qjc7"]
+resource_name = "JumpChargeState"
+script/source = "extends State
+
+@onready var player : Player = $\"../..\"
+
+func physics(_delta) -> void :
+	if not player.is_on_floor() :
+		machine.change_state_from_name(\"Air\")
+
+func input(event):
+	if event.is_action_released(\"jump\"):
+		player.velocity.y = player.jump_height
+		player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\")
+		player.velocity.x = player.flat_direction.x * player.speed
+		player.velocity.z = player.flat_direction.y * player.speed
+		machine.change_state_from_name(\"Air\")
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_5qggx"]
+font = ExtResource("2_ftacq")
+font_size = 64
+font_color = Color(1, 0.509804, 0.568627, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ilkps"]
+font = ExtResource("2_ftacq")
+font_size = 96
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xgeq7"]
+font = ExtResource("2_ftacq")
+font_size = 64
+font_color = Color(0.541176, 0.509804, 1, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_v5kjs")
+acceleration = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mlymq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_vyqu7")
+
+[node name="PlayerMachine" type="Node" parent="."]
+script = SubResource("GDScript_e12yi")
+
+[node name="Air" type="Node" parent="PlayerMachine"]
+script = SubResource("GDScript_20aso")
+
+[node name="Glide" type="Node" parent="PlayerMachine"]
+script = SubResource("GDScript_dxjjn")
+
+[node name="Moving" type="Node" parent="PlayerMachine"]
+script = SubResource("GDScript_yi5eu")
+
+[node name="JumpCharge" type="Node" parent="PlayerMachine"]
+script = SubResource("GDScript_6qjc7")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -960.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="HBoxContainer" parent="UILayer/UI"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UILayer/UI/Health"]
+layout_mode = 2
+text = "HP : "
+label_settings = SubResource("LabelSettings_5qggx")
+vertical_alignment = 1
+
+[node name="HealthLabel" type="Label" parent="UILayer/UI/Health"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_ilkps")
+vertical_alignment = 1
+
+[node name="Mana" type="HBoxContainer" parent="UILayer/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -185.0
+offset_bottom = 127.0
+grow_horizontal = 0
+
+[node name="ManaLabel" type="Label" parent="UILayer/UI/Mana"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_ilkps")
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="UILayer/UI/Mana"]
+layout_mode = 2
+text = " : Mana"
+label_settings = SubResource("LabelSettings_xgeq7")
+vertical_alignment = 1
