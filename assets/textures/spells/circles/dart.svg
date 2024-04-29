@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="200"
+   height="200"
+   viewBox="0 0 66.666667 66.666667"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="dart.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="1.5643378"
+     inkscape:cx="-19.816691"
+     inkscape:cy="142.55233"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     showguides="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid127" />
+    <sodipodi:guide
+       position="33.280705,76.471688"
+       orientation="1,0"
+       id="guide6119"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="21.840977,33.425765"
+       orientation="0,-1"
+       id="guide6182"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="66.588345,66.666667"
+       orientation="0.70710678,-0.70710678"
+       id="guide6184"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,66.560125"
+       orientation="-0.70710678,-0.70710678"
+       id="guide6186"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient3071"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3069" />
+    </linearGradient>
+    <rect
+       x="76.586754"
+       y="73.075708"
+       width="58.323548"
+       height="9.468111"
+       id="rect1003" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path129"
+       style="fill:none;stroke:#ffffff;stroke-width:1.06588;paint-order:markers fill stroke"
+       d="M 59.185647,33.321704 A 25.82976,25.82976 0 0 0 33.355898,7.4919547 25.82976,25.82976 0 0 0 7.5261357,33.321704 25.82976,25.82976 0 0 0 33.355898,59.151466 25.82976,25.82976 0 0 0 59.185647,33.321704 Z" />
+    <text
+       xml:space="preserve"
+       id="text1001"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.2222px;font-family:'Lodeh Regular';-inkscape-font-specification:'Lodeh Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;white-space:pre;shape-padding:0;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.114927;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       x="94.015091"
+       y="86.670906"
+       transform="matrix(0.80142995,0,0,0.80142995,6.5720452,6.6307156)"><textPath
+         xlink:href="#path129"
+         startOffset="100%"
+         id="textPath3817"><tspan
+           id="tspan1005"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.2222px;font-family:'Lodeh Regular';-inkscape-font-specification:'Lodeh Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.114927;stroke-dasharray:none">Arcane Dart Arcane Dart</tspan></textPath></text>
+    <text
+       xml:space="preserve"
+       style="font-size:2.66667px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';text-align:end;text-anchor:end;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.251969;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       x="39.862144"
+       y="27.262123"
+       id="text1059"><tspan
+         sodipodi:role="line"
+         id="tspan1057"
+         style="stroke-width:0.251969"
+         x="39.862144"
+         y="27.262123" /></text>
+    <path
+       id="path6188"
+       style="fill:none;stroke:#ffffff;stroke-width:0.91786;paint-order:markers fill stroke"
+       d="M 55.59865,33.321705 A 22.242763,22.242763 0 0 0 33.355897,11.078951 22.242763,22.242763 0 0 0 11.113132,33.321705 22.242763,22.242763 0 0 0 33.355897,55.564469 22.242763,22.242763 0 0 0 55.59865,33.321705 Z" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.4444px;font-family:'Lodeh Regular';-inkscape-font-specification:'Lodeh Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.125984;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="text6192"><textPath
+         xlink:href="#path6188"
+         startOffset="100%"
+         id="textPath6194"></textPath></text>
+    <path
+       id="path6197"
+       style="fill:none;stroke:#ffffff;stroke-width:0.356408;paint-order:markers fill stroke"
+       d="m 41.992819,33.321708 a 8.6369296,8.6369296 0 0 0 -8.636925,-8.636926 8.6369296,8.6369296 0 0 0 -8.636931,8.636926 8.6369296,8.6369296 0 0 0 8.636931,8.63693 8.6369296,8.6369296 0 0 0 8.636925,-8.63693 z" />
+  </g>
+</svg>

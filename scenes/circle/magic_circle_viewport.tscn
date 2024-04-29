@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw4pkdr5yf0c2"]
+
+[ext_resource type="Shader" path="res://assets/shaders/magic_circle.gdshader" id="1_foxiu"]
+[ext_resource type="FontFile" uid="uid://brupi4v3fs6wu" path="res://assets/fonts/vinque rg.otf" id="2_cq8v0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n848s"]
+viewport_path = NodePath("Text1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdwat"]
+resource_local_to_scene = true
+shader = ExtResource("1_foxiu")
+shader_parameter/text = SubResource("ViewportTexture_n848s")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2iq3f"]
+font = ExtResource("2_cq8v0")
+font_size = 64
+
+[node name="MagicCircleViewport" type="SubViewport"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gdwat")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Text1" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+gui_disable_input = true
+size = Vector2i(512, 70)
+
+[node name="Label" type="Label" parent="Text1"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ARCANE DART"
+label_settings = SubResource("LabelSettings_2iq3f")
+horizontal_alignment = 3
+vertical_alignment = 1

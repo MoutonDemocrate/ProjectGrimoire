@@ -1,13 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj8pbkdp6ykn8"]
+[gd_scene load_steps=9 format=3 uid="uid://cj8pbkdp6ykn8"]
 
 [ext_resource type="ArrayMesh" uid="uid://b36v4rsbirkdf" path="res://scenes/spells/MagicDart/MagicDartModel.tres" id="1_tlniq"]
+[ext_resource type="Texture2D" uid="uid://c2qq8g8gprerb" path="res://assets/textures/spells/circles/dart.svg" id="2_ts0uq"]
+
+[sub_resource type="Curve" id="Curve_kxppq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.010989), -2.94872, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dm6k8"]
+curve = SubResource("Curve_kxppq")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4xj6q"]
+lifetime_randomness = 0.2
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 1.15
+scale_curve = SubResource("CurveTexture_dm6k8")
+hue_variation_min = -0.24
+hue_variation_max = 0.34
+
+[sub_resource type="Shader" id="Shader_18ljt"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+
+uniform sampler2D text;
+uniform vec3 color : source_color;
+
+void fragment() {
+	vec4 text_texture = texture(text,UV);
+	METALLIC = 0.0;
+	ALBEDO = vec3(0.0);
+	EMISSION = text_texture.rgb * color;
+	ALPHA = text_texture.a;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the material.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pvwo0"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_18ljt")
+shader_parameter/color = Color(1, 0.12549, 1, 1)
+shader_parameter/text = ExtResource("2_ts0uq")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_usaee"]
+material = SubResource("ShaderMaterial_pvwo0")
 size = Vector2(1, 1)
 orientation = 2
 
@@ -19,6 +62,7 @@ mesh = ExtResource("1_tlniq")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.690694)
+amount = 20
 visibility_aabb = AABB(-0.837737, -0.849828, -2.59948, 1.67547, 1.69966, 5.19896)
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_4xj6q")
