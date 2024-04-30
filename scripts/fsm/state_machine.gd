@@ -13,8 +13,9 @@ func _ready() -> void :
 func refetch_states() -> void :
 	states = []
 	for child in get_children() :
-		if child is State :
+		if child is State and not child.is_queued_for_deletion():
 			states.append(child)
+	print("Refetched states : ",states)
 
 # Changes the current state, returns old state
 func change_state(new_state : State) -> State :
@@ -28,11 +29,11 @@ func change_state(new_state : State) -> State :
 
 # Changes the current state from state namestring, returns old state
 func change_state_from_name(new_state_name : String) -> State :
-	var that_one_satate : State
+	var that_one_state : State
 	for state in states :
 		if state.name == new_state_name :
-			that_one_satate = state
-	return change_state(that_one_satate)
+			that_one_state = state
+	return change_state(that_one_state)
 
 # Changes the current state from state index, returns old state
 func change_state_from_index(new_state_index : int) -> State :

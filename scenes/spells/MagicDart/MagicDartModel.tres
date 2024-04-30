@@ -3,8 +3,8 @@
 [ext_resource type="Shader" path="res://assets/shaders/MagicDartProj.gdshader" id="1_uql7r"]
 
 [sub_resource type="Gradient" id="Gradient_we1li"]
-offsets = PackedFloat32Array(0.0263158, 0.342105, 1)
-colors = PackedColorArray(0.000303218, 5.78466e-05, 0, 1, 0.204017, 0.000231292, 0.291577, 1, 0.658925, 0.00131917, 0.799965, 1)
+offsets = PackedFloat32Array(0.0263158, 0.210526, 1)
+colors = PackedColorArray(0.000303218, 5.78466e-05, 0, 1, 0.204017, 0.000231292, 0.291577, 1, 0.831611, 0.129414, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_12o6s"]
 gradient = SubResource("Gradient_we1li")

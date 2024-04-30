@@ -17,9 +17,11 @@ class_name Player
 @export var falling_velocity : float = -53.0
 @export var gliding_velocity : float = -10
 @export var gliding_acceleration : float = 10  
+@export var charge_slowdown : float = 10
 
 @export_group("Cosmetic Constants")
 @export var angular_acceleration : float = 10
+@export var locked_to_target : bool = true
 
 @onready var player_body : Node3D = $wizard
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D

@@ -11,10 +11,11 @@ void vertex() {
 void fragment() {
 	vec3 normalview = NORMAL-VIEW;
 	vec3 color = texture(gradient,vec2(pow(clamp(1.0 - size*(sqrt(pow(normalview.x,2) + pow(normalview.y,2))),0.1,1.0),power))).rgb;
+	float mask = clamp(1.0 - 1.3*(sqrt(pow(normalview.x,2) + pow(normalview.y,2))),0.0,1.0);
 	ALBEDO = vec3(0.0);
 	ROUGHNESS = 1.0;
 	METALLIC = 1.0;
-	EMISSION = color*5.0;
+	EMISSION = color*(mask*100.0 + 1.0);
 }
 
 //void light() {

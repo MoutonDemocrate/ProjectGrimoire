@@ -8,6 +8,8 @@
 resource_name = "SpringArmPlayer"
 script/source = "extends SpringArm3D
 
+@onready var player : Player = $\"..\"
+
 var sensitivity = 0.5
 
 # Called when the node enters the scene tree for the first time.
@@ -17,14 +19,22 @@ func _ready():
 	add_excluded_object($\"..\")
 
 func _unhandled_input(event: InputEvent):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not player.locked_to_target :
 		rotation_degrees.x -= event.relative.y * sensitivity
 		rotation_degrees.x = clamp(rotation_degrees.x,-90.0,30.0)
 		rotation_degrees.y -= event.relative.x * sensitivity
 		rotation_degrees.y = wrapf(rotation_degrees.y,0.0,360.0)
-		
+
+var angle_to : float
+var target_vec : Vector3
 func _physics_process(_delta):
-	position = $\"..\".position + Vector3(0,1.524,0)
+	if player.locked_to_target :
+		target_vec = player.target.position - player.position
+		angle_to = Vector3.FORWARD.angle_to(target_vec)
+		print(\"Angleto : \", angle_to,\", vector : \",player.target.position - player.position)
+		#rotation.y = - angle_to if target_vec.x >= 0 else angle_to
+		self.look_at(player.target.position)
+	position = $\"..\".position + Vector3(0,2.0,0)
 "
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mlymq"]
@@ -43,7 +53,7 @@ func physics(_delta) :
 	current_state.physics(_delta)
 
 func input(event : InputEvent):
-	if event.is_action(\"cast1\") :
+	if event.is_action_pressed(\"cast1\") :
 		if len(player.spells) >= 1 :
 			var state : State = add_state(player.spells[0].state_scene.instantiate())
 			state.player = player
@@ -128,6 +138,12 @@ script/source = "extends State
 func physics(_delta) -> void :
 	if not player.is_on_floor() :
 		machine.change_state_from_name(\"Air\")
+	
+	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
+	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed/player.charge_slowdown, player.acceleration*_delta)
+	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed/player.charge_slowdown, player.acceleration*_delta)
+	player.velocity.y = 0
+	player.move_and_slide()
 
 func input(event):
 	if event.is_action_released(\"jump\"):

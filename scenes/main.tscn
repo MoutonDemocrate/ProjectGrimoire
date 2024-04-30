@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwj0nb8aiow10"]
+[gd_scene load_steps=15 format=3 uid="uid://dwj0nb8aiow10"]
 
 [ext_resource type="PackedScene" uid="uid://iymgug8qim0t" path="res://scenes/wizard/player.tscn" id="1_eujhu"]
 [ext_resource type="Texture2D" uid="uid://c3ywjhmvh4607" path="res://assets/hdri/hdr.png" id="2_2w81d"]
 
 [sub_resource type="Gradient" id="Gradient_22eyk"]
 offsets = PackedFloat32Array(0, 0.191489)
-colors = PackedColorArray(0.5, 0.5, 0.5, 1, 0.55, 0.55, 0.55, 1)
+colors = PackedColorArray(0.5, 0.5, 0.5, 1, 0.6, 0.6, 0.6, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_okyjg"]
 noise_type = 2
@@ -19,6 +19,8 @@ cellular_distance_function = 2
 cellular_return_type = 4
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ym8bf"]
+seamless = true
+as_normal_map = true
 color_ramp = SubResource("Gradient_22eyk")
 noise = SubResource("FastNoiseLite_okyjg")
 
@@ -28,6 +30,7 @@ metallic_specular = 0.66
 roughness = 0.11
 normal_enabled = true
 normal_texture = SubResource("NoiseTexture2D_ym8bf")
+uv1_scale = Vector3(3.38, 3.38, 3.38)
 billboard_keep_scale = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cvy3h"]
@@ -35,8 +38,7 @@ lightmap_size_hint = Vector2i(27, 27)
 material = SubResource("StandardMaterial3D_28fwu")
 size = Vector2(5, 5)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5yiqt"]
-points = PackedVector3Array(2.53869, 0.039667, 2.53869, -2.53869, -0.039667, -2.53869, -2.53869, 0.039667, -2.53869, 2.53869, -0.039667, -2.53869, -2.53869, -0.039667, 2.53869, -2.53869, 0.039667, 2.53869, 2.53869, 0.039667, -2.53869, 2.53869, -0.039667, 2.53869)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_lhc43"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_p0h6j"]
 panorama = ExtResource("2_2w81d")
@@ -53,21 +55,37 @@ sky = SubResource("Sky_iproc")
 sky_rotation = Vector3(0, 0, 3.14159)
 glow_enabled = true
 
+[sub_resource type="GDScript" id="GDScript_abmtg"]
+resource_name = "TestTarget"
+script/source = "extends StaticBody3D
+
+@onready var player : Player = $\"../Player1\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	player.target = self
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b4xvm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2otvl"]
+
 [node name="main" type="Node"]
 
 [node name="World" type="Node3D" parent="."]
 
 [node name="Terrain" type="GridMap" parent="World"]
+cell_size = Vector3(4, 4, 4)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="World"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_cvy3h")
 skeleton = NodePath("../../Terrain")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_5yiqt")
+shape = SubResource("WorldBoundaryShape3D_lhc43")
 
 [node name="Player1" parent="." instance=ExtResource("1_eujhu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.960792, 0)
@@ -76,3 +94,13 @@ gliding_velocity = -1.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_41bqt")
+
+[node name="TestTarget" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.3824, 1.48971, 0)
+script = SubResource("GDScript_abmtg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestTarget"]
+shape = SubResource("CapsuleShape3D_b4xvm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestTarget"]
+mesh = SubResource("CapsuleMesh_2otvl")
