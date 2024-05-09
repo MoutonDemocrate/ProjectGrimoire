@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://be7elupiyjrjp"]
+
+[ext_resource type="Script" path="res://scripts/terrain/DestroyBody.gd" id="1_3vy2o"]
+[ext_resource type="PackedScene" uid="uid://dn00trcml343y" path="res://assets/models/terrain/half_bloc_1_frac.glb" id="2_oh610"]
+[ext_resource type="ArrayMesh" uid="uid://cpggm0665ajlt" path="res://assets/models/terrain/models/half_bloc_1.res" id="3_nnjcf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hu6gw"]
+size = Vector3(4, 1, 4)
+
+[node name="DestroyBody" type="StaticBody3D"]
+script = ExtResource("1_3vy2o")
+
+[node name="half_bloc_1_frac" parent="." instance=ExtResource("2_oh610")]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_hu6gw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = ExtResource("3_nnjcf")

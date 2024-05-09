@@ -1,7 +1,8 @@
 extends Area3D
 
-@export var caster : Player
-@export var target : Node3D
+@export_category("Balance")
+@export var damage : float = 1
+@export var destroy_power : float = damage
 
 @export_group("Constants")
 @export var angle_per_second : float = 5.0
@@ -9,6 +10,9 @@ extends Area3D
 @export var speed : float = 20.0
 @export var final_speed : float = 10.0
 @export var speed_decrease_duration : float = 1
+
+var caster : Player
+var target : Node3D
 
 @onready var mesh : MeshInstance3D = $MeshInstance3D
 @onready var collision_shape : CollisionShape3D = $CollisionShape3D
@@ -40,10 +44,18 @@ func _process(delta):
 func _on_body_entered(body):
 	if body == caster :
 		print("Body hit ! It's my wizard :)")
+	elif body is DestroyFragment :
+		print("FRAG")
 	else :
 		print("Body hit ! It's ",body)
-		mesh.hide()
-		initialised = false
-		$GPUParticles3DEnd.emitting = true
-		await $GPUParticles3DEnd.finished
-		queue_free()
+		if body.has_method("damage"):
+			body.damage(1, self)
+		explosion()
+
+func explosion():
+	mesh.hide()
+	initialised = false
+	$GPUParticles3DEnd.emitting = true
+	$GPUParticles3D.emitting = false
+	await $GPUParticles3DEnd.finished
+	queue_free()

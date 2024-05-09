@@ -6,6 +6,8 @@ script/source = "extends State
 
 @onready var player : Player
 
+const SPELL : Spell = preload(\"res://scenes/spells/MagicDart/MagicDart.tres\")
+
 var cast_slot : int
 
 func entered(old_state):
@@ -13,15 +15,16 @@ func entered(old_state):
 	print(\"TEST Instantiated.\")
 	dart.target = player.target
 	dart.caster = player
+	dart.damage = SPELL.damage
 	dart.position = player.position
 	dart.direction = Vector3.RIGHT.rotated(Vector3.UP,player.player_body.rotation.y) + Vector3(
 		0.0,
-		randf_range(0.0,3.0),
+		randf_range(2.0,3.0),
 		randf_range(-3.0,3.0)).normalized().rotated(Vector3.UP,player.player_body.rotation.y)
 	dart.initialised = true
 	print(\"TEST Added.\")
 	player.get_parent().add_child(dart)
-	#player.remove_spell_in_slot(cast_slot)
+	player.spell_manager.remove_spell_in_slot(cast_slot)
 	machine.change_state(old_state)
 	machine.delete_state(self)
 	queue_free()

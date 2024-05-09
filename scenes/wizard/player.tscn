@@ -1,8 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://iymgug8qim0t"]
+[gd_scene load_steps=18 format=3 uid="uid://iymgug8qim0t"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_v5kjs"]
 [ext_resource type="PackedScene" uid="uid://b3nijkc0o0ptt" path="res://scenes/wizard/wizard.tscn" id="2_048if"]
 [ext_resource type="FontFile" uid="uid://xs7xxon56nsf" path="res://assets/fonts/PossumSaltareNF.otf" id="2_ftacq"]
+[ext_resource type="Script" path="res://scripts/player/UILayer.gd" id="3_ri08k"]
+[ext_resource type="PackedScene" uid="uid://rs2sx451mwo8" path="res://scenes/spells/SpellCard.tscn" id="4_fj2tm"]
+[ext_resource type="Script" path="res://scripts/spells/SpellManager.gd" id="4_w1ps3"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_u5d14"]
 
 [sub_resource type="GDScript" id="GDScript_vq6al"]
 resource_name = "SpringArmPlayer"
@@ -25,14 +30,9 @@ func _unhandled_input(event: InputEvent):
 		rotation_degrees.y -= event.relative.x * sensitivity
 		rotation_degrees.y = wrapf(rotation_degrees.y,0.0,360.0)
 
-var angle_to : float
-var target_vec : Vector3
+
 func _physics_process(_delta):
 	if player.locked_to_target :
-		target_vec = player.target.position - player.position
-		angle_to = Vector3.FORWARD.angle_to(target_vec)
-		print(\"Angleto : \", angle_to,\", vector : \",player.target.position - player.position)
-		#rotation.y = - angle_to if target_vec.x >= 0 else angle_to
 		self.look_at(player.target.position)
 	position = $\"..\".position + Vector3(0,2.0,0)
 "
@@ -47,18 +47,46 @@ script/source = "extends StateMachine
 
 @onready var player : Player = $\"..\"
 
+@onready var timer : Timer = Timer.new()
+
+func _ready() -> void :
+	refetch_states()
+	current_state = states[0]
+	timer.one_shot = true
+	timer.wait_time = 0.5
+	add_child(timer)
+
 func physics(_delta) :
 	player.spring_arm_rot = player.spring_arm_3d.rotation.y
 	player.player_body.rotation.y = lerp_angle(player.player_body.rotation.y, player.spring_arm_rot + PI/2 ,_delta * player.angular_acceleration)
 	current_state.physics(_delta)
 
 func input(event : InputEvent):
+	
 	if event.is_action_pressed(\"cast1\") :
-		if len(player.spells) >= 1 :
-			var state : State = add_state(player.spells[0].state_scene.instantiate())
-			state.player = player
-			state.cast_slot = 1
-			change_state(state)
+		timer.start()
+	elif event.is_action_released(\"cast1\") :
+		if timer.is_stopped() :
+			player.spell_manager.cast(4)
+		else: 
+			player.spell_manager.cast(1)
+	
+	elif event.is_action_pressed(\"cast2\") :
+		timer.start()
+	elif event.is_action_released(\"cast2\") :
+		if timer.is_stopped() :
+			player.spell_manager.cast(5)
+		else: 
+			player.spell_manager.cast(2)
+	
+	elif event.is_action_pressed(\"cast3\") :
+		timer.start()
+	elif event.is_action_released(\"cast3\") :
+		if timer.is_stopped() :
+			player.spell_manager.cast(6)
+		else: 
+			player.spell_manager.cast(3)
+	
 	current_state.input(event)
 "
 
@@ -180,7 +208,9 @@ acceleration = 5.0
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.585203, 0)
+shape = SubResource("SeparationRayShape3D_u5d14")
 spring_length = 5.0
+margin = 0.5
 script = SubResource("GDScript_vq6al")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
@@ -209,6 +239,7 @@ script = SubResource("GDScript_yi5eu")
 script = SubResource("GDScript_6qjc7")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_ri08k")
 
 [node name="UI" type="Control" parent="UILayer"]
 layout_mode = 3
@@ -241,7 +272,8 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -185.0
+offset_left = 448.0
+offset_right = 777.0
 offset_bottom = 127.0
 grow_horizontal = 0
 
@@ -256,3 +288,41 @@ layout_mode = 2
 text = " : Mana"
 label_settings = SubResource("LabelSettings_xgeq7")
 vertical_alignment = 1
+
+[node name="Spells" type="FlowContainer" parent="UILayer/UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 815.0
+offset_top = -1046.0
+offset_right = 948.0
+offset_bottom = -34.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/h_separation = 20
+alignment = 2
+vertical = true
+
+[node name="SpellCard1" parent="UILayer/UI/Spells" instance=ExtResource("4_fj2tm")]
+layout_mode = 2
+
+[node name="SpellCard2" parent="UILayer/UI/Spells" instance=ExtResource("4_fj2tm")]
+layout_mode = 2
+
+[node name="SpellCard3" parent="UILayer/UI/Spells" instance=ExtResource("4_fj2tm")]
+layout_mode = 2
+
+[node name="SpellCard4" parent="UILayer/UI/Spells" instance=ExtResource("4_fj2tm")]
+layout_mode = 2
+
+[node name="SpellCard5" parent="UILayer/UI/Spells" instance=ExtResource("4_fj2tm")]
+layout_mode = 2
+
+[node name="SpellCard6" parent="UILayer/UI/Spells" instance=ExtResource("4_fj2tm")]
+layout_mode = 2
+
+[node name="SpellManager" type="Node" parent="."]
+script = ExtResource("4_w1ps3")

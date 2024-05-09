@@ -7,7 +7,6 @@ class_name Player
 @export_group("Resources")
 @export_range(0,1,0.001,"or_greater") var charge : float = 1.0
 @export_range(0,3,0.001,"or_greater") var mana : float = 100.0
-@export var spells : Array[Spell] = [load("res://scenes/spells/MagicDart/MagicDart.tres")]
 
 @export_group("Physics Constants")
 @export var speed : float = 10
@@ -21,11 +20,13 @@ class_name Player
 
 @export_group("Cosmetic Constants")
 @export var angular_acceleration : float = 10
-@export var locked_to_target : bool = true
+@export var locked_to_target : bool = false
 
 @onready var player_body : Node3D = $wizard
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
 @onready var machine : StateMachine = $PlayerMachine
+@onready var spell_manager : SpellManager = $SpellManager
+@onready var ui_layer : UILayer = $UILayer
 
 var direction : Vector3 = Vector3.ZERO
 var flat_direction : Vector2 = Vector2.ZERO
@@ -33,10 +34,6 @@ var flat_direction : Vector2 = Vector2.ZERO
 var spring_arm_rot : float
 
 var target : Node3D
-
-func remove_spell_in_slot(slot : int) :
-	if len(spells) >= slot - 1 :
-		spells.pop_at(slot-1)
 
 func _physics_process(_delta):
 	machine.physics(_delta)

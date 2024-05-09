@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://rs2sx451mwo8"]
+
+[ext_resource type="Script" path="res://scripts/spells/SpellCard.gd" id="1_uv2nj"]
+[ext_resource type="Resource" uid="uid://uomd5bk7sanq" path="res://scenes/spells/Empty.tres" id="2_nrvsb"]
+[ext_resource type="FontFile" uid="uid://brupi4v3fs6wu" path="res://assets/fonts/vinque rg.otf" id="3_wbe14"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmdo7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 5
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_dit2s"]
+font = ExtResource("3_wbe14")
+font_size = 64
+font_color = Color(0.7387, 0.854697, 0.89, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.431373)
+shadow_offset = Vector2(5, 5)
+
+[node name="SpellCard" type="AspectRatioContainer"]
+custom_minimum_size = Vector2(100, 100)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 1
+alignment_vertical = 0
+script = ExtResource("1_uv2nj")
+spell = ExtResource("2_nrvsb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmdo7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_dit2s")
+horizontal_alignment = 2
+vertical_alignment = 2

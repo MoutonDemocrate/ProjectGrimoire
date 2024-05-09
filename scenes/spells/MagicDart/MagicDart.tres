@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_uisc4")
 name = "Arcane Dart"
+id = "arcane_dart"
 icon = ExtResource("1_7t3vh")
 cost = 1
 damage = 1

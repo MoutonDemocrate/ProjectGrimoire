@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwj0nb8aiow10"]
+[gd_scene load_steps=16 format=3 uid="uid://dwj0nb8aiow10"]
 
 [ext_resource type="PackedScene" uid="uid://iymgug8qim0t" path="res://scenes/wizard/player.tscn" id="1_eujhu"]
+[ext_resource type="PackedScene" uid="uid://cvu01gsv2rnl0" path="res://scenes/maps/Temple1/Temple1.tscn" id="1_i8fs7"]
 [ext_resource type="Texture2D" uid="uid://c3ywjhmvh4607" path="res://assets/hdri/hdr.png" id="2_2w81d"]
 
 [sub_resource type="Gradient" id="Gradient_22eyk"]
@@ -54,6 +55,8 @@ background_mode = 2
 sky = SubResource("Sky_iproc")
 sky_rotation = Vector3(0, 0, 3.14159)
 glow_enabled = true
+glow_bloom = 0.15
+glow_hdr_threshold = 0.54
 
 [sub_resource type="GDScript" id="GDScript_abmtg"]
 resource_name = "TestTarget"
@@ -72,23 +75,28 @@ func _ready():
 
 [node name="main" type="Node"]
 
+[node name="GameState" type="Node" parent="."]
+unique_name_in_owner = true
+
 [node name="World" type="Node3D" parent="."]
 
-[node name="Terrain" type="GridMap" parent="World"]
-cell_size = Vector3(4, 4, 4)
-
 [node name="StaticBody3D" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+collision_layer = 3
+collision_mask = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_cvy3h")
-skeleton = NodePath("../../Terrain")
+skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_lhc43")
 
+[node name="Temple1" parent="World" instance=ExtResource("1_i8fs7")]
+
 [node name="Player1" parent="." instance=ExtResource("1_eujhu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.960792, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.960792, 2.45566)
 acceleration = 10.0
 gliding_velocity = -1.0
 
@@ -96,7 +104,7 @@ gliding_velocity = -1.0
 environment = SubResource("Environment_41bqt")
 
 [node name="TestTarget" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.3824, 1.48971, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0175991, 1.48971, 16.4)
 script = SubResource("GDScript_abmtg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestTarget"]

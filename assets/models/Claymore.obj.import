@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cce08p3ucfx34"
+path="res://.godot/imported/Claymore.obj-828c3270bc6b297016103409ffe9b5ee.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Claymore.obj-828c3270bc6b297016103409ffe9b5ee.mesh"]
+
+source_file="res://assets/models/Claymore.obj"
+dest_files=["res://.godot/imported/Claymore.obj-828c3270bc6b297016103409ffe9b5ee.mesh", "res://.godot/imported/Claymore.obj-828c3270bc6b297016103409ffe9b5ee.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
