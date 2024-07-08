@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://chf0haxyoha4l"]
+
+[sub_resource type="GDScript" id="GDScript_yedl4"]
+resource_name = "TEST_SCENE"
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# Alphabetical sorting test
+	print(\"A > B ? \", \"A\".casecmp_to(\"B\"))
+	print(\"B > A ? \", \"B\".casecmp_to(\"A\"))
+	print(\"E > F ? \", \"E\".casecmp_to(\"F\"))
+	print(\"G > G ? \", \"G\".casecmp_to(\"G\"))
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="TEST_SCENE" type="Node"]
+script = SubResource("GDScript_yedl4")

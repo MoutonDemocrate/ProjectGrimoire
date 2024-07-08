@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://cvu01gsv2rnl0"]
+[gd_scene load_steps=3 format=3 uid="uid://cvu01gsv2rnl0"]
+
+[ext_resource type="PackedScene" uid="uid://bf1k6n1623s7k" path="res://scenes/maps/Temple1/half_bloc_1.tscn" id="1_y0wy5"]
+[ext_resource type="Material" uid="uid://c4xo5132uqdm6" path="res://assets/models/terrain/materials/reappear.tres" id="2_r4x3k"]
 
 [node name="Temple1" type="Node3D"]
+
+[node name="DestroyBody" parent="." instance=ExtResource("1_y0wy5")]
+break_material = ExtResource("2_r4x3k")

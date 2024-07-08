@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://eyvxmkqfdil"]
+
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_tknl3"]
+[ext_resource type="Texture2D" uid="uid://guwnih6usef4" path="res://assets/textures/icons/deck_white.png" id="2_qthmb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3sdny"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwd1j"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.227451, 0.227451, 0.227451, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="DeckPanel" type="PanelContainer"]
+offset_right = 205.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_3sdny")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_tknl3")
+theme_override_constants/separation = 15
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_qthmb")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="DeckName" type="Label" parent="HBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+text = "Default Deck"
+
+[node name="Window" type="Window" parent="."]
+title = "Default Deck"
+position = Vector2i(385, 36)
+size = Vector2i(344, 173)
+wrap_controls = true
+transient = true
+exclusive = true
+unresizable = true
+borderless = true
+always_on_top = true
+unfocusable = true
+popup_window = true
+content_scale_mode = 1
+theme = ExtResource("1_tknl3")
+
+[node name="PanelContainer" type="PanelContainer" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_tknl3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hwd1j")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Window/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Window/PanelContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

@@ -9,12 +9,12 @@ const SPELL_EMPTY : Spell = preload("res://scenes/spells/Empty.tres")
 
 func _ready():
 	await player.ready
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.tres"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.tres"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.tres"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.tres"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.tres"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.tres"))
+	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
 	refresh_spells()
 
 func refresh_spells() -> void :

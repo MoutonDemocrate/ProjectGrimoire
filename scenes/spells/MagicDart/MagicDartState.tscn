@@ -6,7 +6,7 @@ script/source = "extends State
 
 @onready var player : Player
 
-const SPELL : Spell = preload(\"res://scenes/spells/MagicDart/MagicDart.tres\")
+var SPELL : Spell = load(\"res://scenes/spells/MagicDart/MagicDart.res\")
 
 var cast_slot : int
 

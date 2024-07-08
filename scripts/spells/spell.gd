@@ -9,3 +9,9 @@ class_name Spell
 @export var duration : float
 @export_multiline var description : String
 @export var state_scene : PackedScene
+
+## Returns list of all spells
+func get_spell_list_paths() -> Array[String] :
+	return ["res://scenes/spells/MagicDart/MagicDart.res",
+		"res://scenes/spells/BubbleShield/BubbleShield.res",
+		"res://scenes/spells/Claymore/Claymore.res"]

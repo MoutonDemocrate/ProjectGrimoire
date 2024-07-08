@@ -1,0 +1,12 @@
+# Blender 4.1.1 MTL File: 'wizard.blend'
+# www.blender.org
+
+newmtl WizardCloak
+Ns 0.000000
+Ka 0.145455 0.145455 0.145455
+Kd 0.051936 0.006929 0.077390
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1

@@ -24,9 +24,11 @@ class_name Player
 
 @onready var player_body : Node3D = $wizard
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
-@onready var machine : StateMachine = $PlayerMachine
+@onready var machine : Machine = $PlayerMachine
 @onready var spell_manager : SpellManager = $SpellManager
 @onready var ui_layer : UILayer = $UILayer
+
+
 
 var direction : Vector3 = Vector3.ZERO
 var flat_direction : Vector2 = Vector2.ZERO
