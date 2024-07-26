@@ -1,5 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvu01gsv2rnl0"]
 
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://bf1k6n1623s7k" path="res://scenes/maps/Temple1/half_bloc_1.tscn" id="1_y0wy5"]
 [ext_resource type="Material" uid="uid://c4xo5132uqdm6" path="res://assets/models/terrain/materials/reappear.tres" id="2_r4x3k"]
 
@@ -7,3 +8,38 @@
 
 [node name="DestroyBody" parent="." instance=ExtResource("1_y0wy5")]
 break_material = ExtResource("2_r4x3k")
+=======
+[ext_resource type="PackedScene" uid="uid://bf1k6n1623s7k" path="res://scenes/maps/Temple1/half_bloc_1.tscn" id="1_jmplx"]
+[ext_resource type="PackedScene" uid="uid://susd41w26rsf" path="res://scenes/maps/Temple1/stairs_1.tscn" id="2_n6efw"]
+
+[node name="Temple1" type="Node3D"]
+
+[node name="DestroyBody" parent="." instance=ExtResource("1_jmplx")]
+
+[node name="DestroyBody2" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="DestroyBody3" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="DestroyBody4" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="DestroyBody5" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="DestroyBody6" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="DestroyBody" parent="DestroyBody6" instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+
+[node name="DestroyBody" parent="DestroyBody6/DestroyBody" instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="DestroyBody2" parent="DestroyBody6/DestroyBody" instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="DestroyBody3" parent="DestroyBody6/DestroyBody" instance=ExtResource("2_n6efw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -8)
+>>>>>>> Stashed changes

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://iymgug8qim0t"]
+[gd_scene load_steps=19 format=3 uid="uid://iymgug8qim0t"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_v5kjs"]
 [ext_resource type="PackedScene" uid="uid://b3nijkc0o0ptt" path="res://scenes/wizard/wizard.tscn" id="2_048if"]
@@ -43,7 +43,11 @@ height = 1.67188
 
 [sub_resource type="GDScript" id="GDScript_e12yi"]
 resource_name = "PlayerMachine"
+<<<<<<< Updated upstream
 script/source = "extends Machine
+=======
+script/source = "extends MachinePhysics
+>>>>>>> Stashed changes
 
 @onready var player : Player = $\"..\"
 
@@ -56,12 +60,12 @@ func _ready() -> void :
 	timer.wait_time = 0.5
 	add_child(timer)
 
-func physics(_delta) :
+func machine_physics(_delta) :
 	player.spring_arm_rot = player.spring_arm_3d.rotation.y
 	player.player_body.rotation.y = lerp_angle(player.player_body.rotation.y, player.spring_arm_rot + PI/2 ,_delta * player.angular_acceleration)
-	current_state.physics(_delta)
+	current_state.state_physics(_delta)
 
-func input(event : InputEvent):
+func machine_input(event : InputEvent):
 	
 	if event.is_action_pressed(\"cast1\") :
 		timer.start()
@@ -87,16 +91,16 @@ func input(event : InputEvent):
 		else: 
 			player.spell_manager.cast(3)
 	
-	current_state.input(event)
+	current_state.state_input(event)
 "
 
 [sub_resource type="GDScript" id="GDScript_20aso"]
 resource_name = "AirState"
-script/source = "extends State
+script/source = "extends StatePhysics
 
 @onready var player : Player = $\"../..\"
 
-func physics(_delta):
+func state_physics(_delta):
 	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta/4)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta/4)
@@ -108,18 +112,15 @@ func physics(_delta):
 	
 	if player.is_on_floor() :
 		machine.change_state_from_name(\"Moving\")
-
-func input(event):
-	pass
 "
 
 [sub_resource type="GDScript" id="GDScript_dxjjn"]
 resource_name = "GlideState"
-script/source = "extends State
+script/source = "extends StatePhysics
 
 @onready var player : Player = $\"../..\"
 
-func physics(_delta):
+func state_physics(_delta):
 	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed/2, player.acceleration*_delta/4)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed/2, player.acceleration*_delta/4)
@@ -131,22 +132,19 @@ func physics(_delta):
 		
 	if player.is_on_floor() :
 		machine.change_state_from_name(\"Moving\")
-
-func input(event):
-	pass
 "
 
 [sub_resource type="GDScript" id="GDScript_yi5eu"]
 resource_name = "MovingState"
-script/source = "extends State
+script/source = "extends StatePhysics
 
 @onready var player : Player = $\"../..\"
 
-func input(event : InputEvent):
+func state_input(event : InputEvent):
 	if event.is_action_pressed(\"jump\") :
 		machine.change_state_from_name(\"JumpCharge\")
 
-func physics(_delta) -> void :
+func state_physics(_delta) -> void :
 	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta)
@@ -159,11 +157,11 @@ func physics(_delta) -> void :
 
 [sub_resource type="GDScript" id="GDScript_6qjc7"]
 resource_name = "JumpChargeState"
-script/source = "extends State
+script/source = "extends StatePhysics
 
 @onready var player : Player = $\"../..\"
 
-func physics(_delta) -> void :
+func state_physics(_delta) -> void :
 	if not player.is_on_floor() :
 		machine.change_state_from_name(\"Air\")
 	
@@ -173,13 +171,30 @@ func physics(_delta) -> void :
 	player.velocity.y = 0
 	player.move_and_slide()
 
-func input(event):
+func state_input(event):
 	if event.is_action_released(\"jump\"):
 		player.velocity.y = player.jump_height
 		player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 		player.velocity.x = player.flat_direction.x * player.speed
 		player.velocity.z = player.flat_direction.y * player.speed
 		machine.change_state_from_name(\"Air\")
+"
+
+[sub_resource type="GDScript" id="GDScript_lr0ew"]
+resource_name = "PlayerUIValues"
+script/source = "extends Control
+
+@onready var player : Player = $\"../..\"
+
+func _ready():
+	player.mana_changed.connect(set_mana)
+	player.health_changed.connect(set_health)
+
+func set_mana(before:int, after:int):
+	$Mana/ManaLabel.text = str(after)
+
+func set_health(before:int, after:int):
+	$Health/HealthLabel.text = str(after)
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_5qggx"]
@@ -249,6 +264,7 @@ anchor_bottom = 1.0
 offset_right = -960.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_lr0ew")
 
 [node name="Health" type="HBoxContainer" parent="UILayer/UI"]
 layout_mode = 1
@@ -326,3 +342,9 @@ layout_mode = 2
 
 [node name="SpellManager" type="Node" parent="."]
 script = ExtResource("4_w1ps3")
+
+[node name="ManaTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="ManaTimer" to="." method="increment_mana"]

@@ -6,7 +6,11 @@ script/source = "extends State
 
 @onready var player : Player
 
+<<<<<<< Updated upstream
 var SPELL : Spell = load(\"res://scenes/spells/MagicDart/MagicDart.res\")
+=======
+var SPELL  = load(\"res://scenes/spells/MagicDart/MagicDart.tres\")
+>>>>>>> Stashed changes
 
 var cast_slot : int
 
