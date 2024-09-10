@@ -50,8 +50,11 @@ func remove_spell_in_slot(slot : int) :
 
 ## Cast a spell from slot #[slot]
 func cast(slot : int) :
-	if len(spells) >= 1 and spells[slot-1].id !="empty" :
-		var state : State = player.machine.add_state(spells[slot - 1].state_scene.instantiate())
-		state.player = player
-		state.cast_slot = slot
-		player.machine.change_state(state)
+	var current_spell : Spell = spells[slot-1]
+	if len(spells) >= 1 and current_spell.id !="empty" :
+		if player.mana >= current_spell.cost :
+			var state : State = player.machine.add_state(spells[slot - 1].state_scene.instantiate())
+			state.player = player
+			state.cast_slot = slot
+			player.machine.change_state(state)
+			player.increment_mana(-1 * current_spell.cost)

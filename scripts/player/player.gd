@@ -5,8 +5,12 @@ class_name Player
 @export var color : Color = Color.REBECCA_PURPLE
 
 @export_group("Resources")
-@export_range(0,1,0.001,"or_greater") var charge : float = 1.0
-@export_range(0,3,0.001,"or_greater") var mana : float = 100.0
+## Charge : used to hover, and for other movement options.
+@export_range(0,100,0.001,"or_greater") var charge : float = 1.0
+## Mana : used to cast spells.
+@export_range(0,100,1,"or_greater") var mana : int = 0
+## Player health : if it reaches 0, the player dies.
+@export_range(0,100,1,"or_greater") var health : int = 10
 
 @export_group("Physics Constants")
 @export var speed : float = 10
@@ -22,11 +26,16 @@ class_name Player
 @export var angular_acceleration : float = 10
 @export var locked_to_target : bool = false
 
+## SIGNALS
+signal mana_changed(before:int, after:int)
+signal health_changed(before:int, after:int)
+
 @onready var player_body : Node3D = $wizard
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
 @onready var machine : PhysicsMachine = $PlayerMachine
 @onready var spell_manager : SpellManager = $SpellManager
 @onready var ui_layer : UILayer = $UILayer
+@onready var mana_timer : Timer = $ManaTimer
 
 
 
@@ -45,3 +54,8 @@ func _physics_process(_delta):
 
 func _unhandled_input(event):
 	machine.machine_input(event)
+
+func increment_mana(amount:=1):
+	mana += amount
+	mana_changed.emit(mana-amount, mana)
+	print("Mana is now : ", mana)

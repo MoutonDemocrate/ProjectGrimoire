@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://iymgug8qim0t"]
+[gd_scene load_steps=19 format=3 uid="uid://iymgug8qim0t"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_v5kjs"]
 [ext_resource type="PackedScene" uid="uid://b3nijkc0o0ptt" path="res://scenes/wizard/wizard.tscn" id="2_048if"]
@@ -46,15 +46,15 @@ height = 1.67188
 
 [sub_resource type="GDScript" id="GDScript_yi5eu"]
 resource_name = "MovingState"
-script/source = "extends State
+script/source = "extends StatePhysics
 
 @onready var player : Player = $\"../..\"
 
-func input(event : InputEvent):
+func state_input(event : InputEvent):
 	if event.is_action_pressed(\"jump\") :
 		machine.change_state_from_name(\"JumpCharge\")
 
-func physics(_delta) -> void :
+func state_physics(_delta) -> void :
 	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta)
@@ -67,11 +67,11 @@ func physics(_delta) -> void :
 
 [sub_resource type="GDScript" id="GDScript_6qjc7"]
 resource_name = "JumpChargeState"
-script/source = "extends State
+script/source = "extends StatePhysics
 
 @onready var player : Player = $\"../..\"
 
-func physics(_delta) -> void :
+func state_physics(_delta) -> void :
 	if not player.is_on_floor() :
 		machine.change_state_from_name(\"Air\")
 
@@ -81,13 +81,30 @@ func physics(_delta) -> void :
 	player.velocity.y = 0
 	player.move_and_slide()
 
-func input(event):
+func state_input(event):
 	if event.is_action_released(\"jump\"):
 		player.velocity.y = player.jump_height
 		player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 		player.velocity.x = player.flat_direction.x * player.speed
 		player.velocity.z = player.flat_direction.y * player.speed
 		machine.change_state_from_name(\"Air\")
+"
+
+[sub_resource type="GDScript" id="GDScript_lr0ew"]
+resource_name = "PlayerUIValues"
+script/source = "extends Control
+
+@onready var player : Player = $\"../..\"
+
+func _ready():
+	player.mana_changed.connect(set_mana)
+	player.health_changed.connect(set_health)
+
+func set_mana(before:int, after:int):
+	$Mana/ManaLabel.text = str(after)
+
+func set_health(before:int, after:int):
+	$Health/HealthLabel.text = str(after)
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_5qggx"]
@@ -157,6 +174,7 @@ anchor_bottom = 1.0
 offset_right = -960.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_lr0ew")
 
 [node name="Health" type="HBoxContainer" parent="UILayer/UI"]
 layout_mode = 1
@@ -234,3 +252,9 @@ layout_mode = 2
 
 [node name="SpellManager" type="Node" parent="."]
 script = ExtResource("4_w1ps3")
+
+[node name="ManaTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="ManaTimer" to="." method="increment_mana"]
