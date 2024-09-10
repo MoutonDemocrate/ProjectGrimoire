@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://eyvxmkqfdil"]
+
+[ext_resource type="Script" path="res://scripts/UI/DeckTooltipOwner.gd" id="1_bk4j8"]
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_tknl3"]
+[ext_resource type="Texture2D" uid="uid://guwnih6usef4" path="res://assets/textures/icons/deck_white.png" id="2_qthmb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3sdny"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="DeckPanel" type="PanelContainer"]
+offset_right = 259.0
+offset_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_3sdny")
+script = ExtResource("1_bk4j8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_tknl3")
+theme_override_constants/separation = 15
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_qthmb")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="DeckName" type="Label" parent="HBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+text = "Default Deck"

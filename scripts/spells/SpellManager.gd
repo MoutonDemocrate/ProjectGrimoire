@@ -18,7 +18,6 @@ func _ready():
 	refresh_spells()
 
 func refresh_spells() -> void :
-	print("REFRESH BEGIN ---------")
 	for i in range(1,6) :
 		print(player.ui_layer.spell_container.get_child(i-1).spell.id)
 		if player.ui_layer.spell_container.get_child(i-1).spell.id == "empty"  :
@@ -27,7 +26,7 @@ func refresh_spells() -> void :
 	for i in range(0,6) :
 		spells[i] = player.ui_layer.spell_container.get_child(i).spell
 
-## Adds slot
+## Adds [spell] in slot #[slot]
 func add_spell(spell : Spell, slot : int = -1) -> void :
 	if (slot == -1) :
 		var i = 0
@@ -40,6 +39,7 @@ func add_spell(spell : Spell, slot : int = -1) -> void :
 		spells[slot-1] = spell
 		player.ui_layer.spell_container.get_child(slot-1).spell = spell
 
+## Removes [spell] in slot #[slot]
 func remove_spell_in_slot(slot : int) :
 	if len(spells) >= slot - 1 :
 		print("SPELL REMOVED ? SLOT = ",slot)
@@ -47,7 +47,8 @@ func remove_spell_in_slot(slot : int) :
 		refresh_spells()
 	else :
 		print("len(spells) = ",len(spells))
-	
+
+## Cast a spell from slot #[slot]
 func cast(slot : int) :
 	if len(spells) >= 1 and spells[slot-1].id !="empty" :
 		var state : State = player.machine.add_state(spells[slot - 1].state_scene.instantiate())

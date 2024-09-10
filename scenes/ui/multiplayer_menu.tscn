@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://n8tsfp0mbeaa"]
+
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_s51ys"]
+[ext_resource type="Script" path="res://scripts/UI/multiplayer_menu.gd" id="2_62uup"]
+[ext_resource type="PackedScene" uid="uid://k0gs275562dr" path="res://scenes/ui/multiplayer_menus/join_a_room.tscn" id="2_am4qf"]
+[ext_resource type="PackedScene" uid="uid://cb40sh4lmps3q" path="res://scenes/ui/multiplayer_menus/host_a_room.tscn" id="2_n0sdb"]
+[ext_resource type="PackedScene" uid="uid://bvlvih23yskq5" path="res://scenes/ui/multiplayer_menus/room_menu.tscn" id="4_i0a04"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mo8xv"]
+
+[node name="MultiplayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s51ys")
+script = ExtResource("2_62uup")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mo8xv")
+current_tab = 0
+tabs_visible = false
+
+[node name="TabContainerJoinHost" type="TabContainer" parent="TabContainer"]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 1
+metadata/_tab_index = 0
+
+[node name="Join A Room" parent="TabContainer/TabContainerJoinHost" instance=ExtResource("2_am4qf")]
+visible = false
+layout_mode = 2
+
+[node name="Host A Room" parent="TabContainer/TabContainerJoinHost" instance=ExtResource("2_n0sdb")]
+layout_mode = 2
+
+[node name="RoomMenu" parent="TabContainer" instance=ExtResource("4_i0a04")]
+visible = false
+layout_mode = 2

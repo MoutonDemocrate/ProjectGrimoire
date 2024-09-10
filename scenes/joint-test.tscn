@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxptslrtmhjva"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u6b5r"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cvlk2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v3jj2"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.97486)
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="."]
+constant_force = Vector3(0, -19.6, 0)
+constant_torque = Vector3(0, 0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("SphereShape3D_u6b5r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+mesh = SubResource("SphereMesh_cvlk2")
+
+[node name="ConeTwistJoint3D" type="ConeTwistJoint3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.919614, -1.00325, 0)
+node_a = NodePath("..")
+node_b = NodePath("RigidBody3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="AnimatableBody3D/ConeTwistJoint3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D/ConeTwistJoint3D/RigidBody3D"]
+shape = SubResource("SphereShape3D_v3jj2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D/ConeTwistJoint3D/RigidBody3D"]
+mesh = SubResource("SphereMesh_cvlk2")

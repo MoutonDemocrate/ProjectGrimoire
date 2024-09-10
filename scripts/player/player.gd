@@ -24,7 +24,7 @@ class_name Player
 
 @onready var player_body : Node3D = $wizard
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
-@onready var machine : Machine = $PlayerMachine
+@onready var machine : PhysicsMachine = $PlayerMachine
 @onready var spell_manager : SpellManager = $SpellManager
 @onready var ui_layer : UILayer = $UILayer
 
@@ -37,8 +37,11 @@ var spring_arm_rot : float
 
 var target : Node3D
 
+func _process(delta: float) -> void:
+	machine.machine_process(delta)
+
 func _physics_process(_delta):
-	machine.physics(_delta)
+	machine.machine_physics(_delta)
 
 func _unhandled_input(event):
-	machine.input(event)
+	machine.machine_input(event)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Deck" load_steps=3 format=3 uid="uid://de3b6etdl4t7"]
+
+[ext_resource type="Script" path="res://scripts/decks/Deck.gd" id="1_h8art"]
+[ext_resource type="Script" path="res://scripts/spells/spell.gd" id="2_mst4g"]
+
+[resource]
+script = ExtResource("1_h8art")
+name = "Default Deck"
+spells = Array[ExtResource("2_mst4g")]([])
+max_size = 15

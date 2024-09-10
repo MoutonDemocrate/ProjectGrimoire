@@ -1,7 +1,10 @@
 extends Resource
 class_name Deck
 
+const DEFAULT_DECK : Resource = preload("res://scripts/decks/DefaultDeck.tres")
+
 @export var name: String = "Default Deck"
+@export_multiline var description: String = "This is the default MC Wizards deck. Try it out in a match!"
 @export var spells: Array[Spell] = []
 
 @export var max_size := 15
@@ -48,5 +51,5 @@ func sort() -> Error :
 				found = true
 		if not found :
 			new_spells.append(spells[i])
-	
+
 	return OK

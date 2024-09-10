@@ -1,0 +1,140 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvlvih23yskq5"]
+
+[ext_resource type="Script" path="res://scripts/UI/room_menu.gd" id="1_k6qgn"]
+[ext_resource type="PackedScene" uid="uid://ce3abytaw7xey" path="res://scenes/ui/RoomPlayer.tscn" id="2_dkbix"]
+[ext_resource type="PackedScene" uid="uid://c6d5l3plqjaoj" path="res://scenes/ui/h_box_info.tscn" id="3_ag4xu"]
+
+[sub_resource type="GDScript" id="GDScript_igaux"]
+resource_name = "PanelCointainerChat"
+script/source = "extends PanelContainer
+
+@onready var vbox_chat : VBoxContainer = $VBoxContainer/ScrollContainerChat/VBoxChat
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pxqj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2j4e"]
+
+[node name="RoomMenu" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k6qgn")
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="PanelContainerPlayerList" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxPlayerList" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList"]
+layout_mode = 2
+
+[node name="RoomPlayerTest" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList" instance=ExtResource("2_dkbix")]
+layout_mode = 2
+host = false
+
+[node name="PanelContainerChat" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = SubResource("GDScript_igaux")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainerChat"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainerChat" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0pxqj")
+
+[node name="VBoxChat" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/PanelContainer/ScrollContainerChat"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/PanelContainer/ScrollContainerChat/VBoxChat"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.431373, 0.431373, 0.431373, 1)
+text = "There is nothing here... for now..."
+
+[node name="HBoxChatLine" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/HBoxChatLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Send a message !"
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/HBoxChatLine"]
+layout_mode = 2
+text = "Send"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Room & Game Settings
+"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_s2j4e")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxInfo" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxInfoName" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo" instance=ExtResource("3_ag4xu")]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2/PanelContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Start !"

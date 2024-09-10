@@ -3,9 +3,12 @@
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_v5kjs"]
 [ext_resource type="PackedScene" uid="uid://b3nijkc0o0ptt" path="res://scenes/wizard/wizard.tscn" id="2_048if"]
 [ext_resource type="FontFile" uid="uid://xs7xxon56nsf" path="res://assets/fonts/PossumSaltareNF.otf" id="2_ftacq"]
+[ext_resource type="Script" path="res://scripts/player/PlayerMachine.gd" id="3_lv7hx"]
 [ext_resource type="Script" path="res://scripts/player/UILayer.gd" id="3_ri08k"]
+[ext_resource type="Script" path="res://scripts/player/states/AirState.gd" id="4_68lsh"]
 [ext_resource type="PackedScene" uid="uid://rs2sx451mwo8" path="res://scenes/spells/SpellCard.tscn" id="4_fj2tm"]
 [ext_resource type="Script" path="res://scripts/spells/SpellManager.gd" id="4_w1ps3"]
+[ext_resource type="Script" path="res://scripts/player/states/GlideState.gd" id="5_2wnee"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_u5d14"]
 
@@ -41,101 +44,6 @@ func _physics_process(_delta):
 radius = 0.493673
 height = 1.67188
 
-[sub_resource type="GDScript" id="GDScript_e12yi"]
-resource_name = "PlayerMachine"
-script/source = "extends Machine
-
-@onready var player : Player = $\"..\"
-
-@onready var timer : Timer = Timer.new()
-
-func _ready() -> void :
-	refetch_states()
-	current_state = states[0]
-	timer.one_shot = true
-	timer.wait_time = 0.5
-	add_child(timer)
-
-func physics(_delta) :
-	player.spring_arm_rot = player.spring_arm_3d.rotation.y
-	player.player_body.rotation.y = lerp_angle(player.player_body.rotation.y, player.spring_arm_rot + PI/2 ,_delta * player.angular_acceleration)
-	current_state.physics(_delta)
-
-func input(event : InputEvent):
-	
-	if event.is_action_pressed(\"cast1\") :
-		timer.start()
-	elif event.is_action_released(\"cast1\") :
-		if timer.is_stopped() :
-			player.spell_manager.cast(4)
-		else: 
-			player.spell_manager.cast(1)
-	
-	elif event.is_action_pressed(\"cast2\") :
-		timer.start()
-	elif event.is_action_released(\"cast2\") :
-		if timer.is_stopped() :
-			player.spell_manager.cast(5)
-		else: 
-			player.spell_manager.cast(2)
-	
-	elif event.is_action_pressed(\"cast3\") :
-		timer.start()
-	elif event.is_action_released(\"cast3\") :
-		if timer.is_stopped() :
-			player.spell_manager.cast(6)
-		else: 
-			player.spell_manager.cast(3)
-	
-	current_state.input(event)
-"
-
-[sub_resource type="GDScript" id="GDScript_20aso"]
-resource_name = "AirState"
-script/source = "extends State
-
-@onready var player : Player = $\"../..\"
-
-func physics(_delta):
-	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
-	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed, player.acceleration*_delta/4)
-	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta/4)
-	player.velocity.y = lerpf(player.velocity.y, player.falling_velocity, player.vertical_acceleration*_delta)
-	player.move_and_slide()
-	
-	if Input.is_action_pressed(\"jump\"):
-		machine.change_state_from_name(\"Glide\")
-	
-	if player.is_on_floor() :
-		machine.change_state_from_name(\"Moving\")
-
-func input(event):
-	pass
-"
-
-[sub_resource type="GDScript" id="GDScript_dxjjn"]
-resource_name = "GlideState"
-script/source = "extends State
-
-@onready var player : Player = $\"../..\"
-
-func physics(_delta):
-	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
-	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed/2, player.acceleration*_delta/4)
-	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed/2, player.acceleration*_delta/4)
-	player.velocity.y = lerpf(player.velocity.y, player.gliding_velocity, player.gliding_acceleration*_delta)
-	player.move_and_slide()
-	
-	if not Input.is_action_pressed(\"jump\"):
-		machine.change_state_from_name(\"Air\")
-		
-	if player.is_on_floor() :
-		machine.change_state_from_name(\"Moving\")
-
-func input(event):
-	pass
-"
-
 [sub_resource type="GDScript" id="GDScript_yi5eu"]
 resource_name = "MovingState"
 script/source = "extends State
@@ -152,7 +60,7 @@ func physics(_delta) -> void :
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed, player.acceleration*_delta)
 	player.velocity.y = 0
 	player.move_and_slide()
-	
+
 	if not player.is_on_floor() :
 		machine.change_state_from_name(\"Air\")
 "
@@ -166,7 +74,7 @@ script/source = "extends State
 func physics(_delta) -> void :
 	if not player.is_on_floor() :
 		machine.change_state_from_name(\"Air\")
-	
+
 	player.flat_direction = Input.get_vector(\"left\",\"right\",\"forward\",\"backward\").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed/player.charge_slowdown, player.acceleration*_delta)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed/player.charge_slowdown, player.acceleration*_delta)
@@ -224,13 +132,13 @@ shape = SubResource("CapsuleShape3D_mlymq")
 transform = Transform3D(0.3, 0, -8.88178e-16, 0, 0.3, 0, 8.88178e-16, 0, 0.3, 0, -0.434112, 0)
 
 [node name="PlayerMachine" type="Node" parent="."]
-script = SubResource("GDScript_e12yi")
+script = ExtResource("3_lv7hx")
 
 [node name="Air" type="Node" parent="PlayerMachine"]
-script = SubResource("GDScript_20aso")
+script = ExtResource("4_68lsh")
 
 [node name="Glide" type="Node" parent="PlayerMachine"]
-script = SubResource("GDScript_dxjjn")
+script = ExtResource("5_2wnee")
 
 [node name="Moving" type="Node" parent="PlayerMachine"]
 script = SubResource("GDScript_yi5eu")

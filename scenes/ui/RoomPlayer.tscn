@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce3abytaw7xey"]
+
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_grcx0"]
+[ext_resource type="PackedScene" uid="uid://eyvxmkqfdil" path="res://scenes/ui/deck_panel.tscn" id="2_dvatl"]
+
+[sub_resource type="GDScript" id="GDScript_uao4x"]
+resource_name = "RoomPlayer"
+script/source = "@tool
+extends HBoxContainer
+class_name RoomPlayer
+
+enum eRoomTitle {HOST, GUEST}
+
+@onready var label_room_title : Label = $LabelRoomTitle
+@onready var label_name : Label = $LabelName
+@onready var label_player_title : Label = $LabelPlayerTitle
+
+@export var host : bool = false :
+	set(p_host):
+		await ready
+		host = p_host
+		if host :
+			label_room_title.add_theme_color_override(\"font_color\", Color.RED)
+		else :
+			label_room_title.add_theme_color_override(\"font_color\", Color.GREEN)
+		label_room_title.text = \"Host\" if p_host else \"Guest\"
+
+@export var player_name : String = \"Player\" :
+	set(p_player_name):
+		player_name = p_player_name
+		label_name.text = p_player_name
+
+@export var player_title : String = \"Apprentice\" :
+	set(p_player_title):
+		player_title = p_player_title
+		label_player_title.text = p_player_title
+
+@export var deck : Deck = Deck.DEFAULT_DECK
+"
+
+[node name="RoomPlayer" type="HBoxContainer"]
+offset_right = 493.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+theme = ExtResource("1_grcx0")
+theme_override_constants/separation = 32
+script = SubResource("GDScript_uao4x")
+host = true
+deck = null
+
+[node name="LabelRoomTitle" type="Label" parent="."]
+texture_filter = 2
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Host"
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Player"
+
+[node name="LabelPlayerTitle" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
+text = "Apprentice"
+
+[node name="DeckPanel" parent="." instance=ExtResource("2_dvatl")]
+layout_mode = 2

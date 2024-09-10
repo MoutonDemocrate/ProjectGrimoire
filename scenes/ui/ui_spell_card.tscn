@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpf4qubj0hqka"]
+
+[ext_resource type="Script" path="res://scripts/UI/UISpellCard.gd" id="1_8swkl"]
+[ext_resource type="Texture2D" uid="uid://bjgg174ufhfnf" path="res://assets/textures/icons/spells/SpellCard.png" id="1_lh2d7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjy3b"]
+
+[sub_resource type="Sky" id="Sky_w86yg"]
+sky_material = SubResource("ProceduralSkyMaterial_jjy3b")
+
+[sub_resource type="Environment" id="Environment_wgjpd"]
+background_mode = 2
+sky = SubResource("Sky_w86yg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1d4r3"]
+transparency = 1
+albedo_texture = ExtResource("1_lh2d7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uq6qi"]
+material = SubResource("StandardMaterial3D_1d4r3")
+size = Vector2(3.5, 5)
+
+[node name="MarginContainer" type="MarginContainer"]
+offset_right = 270.0
+offset_bottom = 270.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_8swkl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_lh2d7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="UISpellCard" type="SubViewportContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/UISpellCard"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/UISpellCard/SubViewport"]
+environment = SubResource("Environment_wgjpd")
+current = true
+fov = 1.0
+size = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MarginContainer/UISpellCard/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -350)
+mesh = SubResource("PlaneMesh_uq6qi")
