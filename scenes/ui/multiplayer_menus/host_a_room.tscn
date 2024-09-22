@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cb40sh4lmps3q"]
+[gd_scene load_steps=6 format=3 uid="uid://cb40sh4lmps3q"]
 
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_ui1uh"]
 [ext_resource type="Texture2D" uid="uid://4d2qerd03rba" path="res://assets/textures/icons/eye-regular-white.svg" id="1_wvq6h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijun1"]
@@ -10,7 +11,7 @@ script/source = "extends PanelContainer
 
 @onready var room_name_lineedit : LineEdit = $PanelContainer/VBoxContainer/HBoxRoomName/LineEdit
 @onready var room_password_lineedit : LineEdit = $PanelContainer/VBoxContainer/HBoxRoomPassword/LineEdit
-@onready var room_port_lineedit : LineEdit = $PanelContainer/VBoxContainer/HBoxRoomPort/LineEdit
+@onready var room_port_spinbox : SpinBox = $PanelContainer/VBoxContainer/HBoxRoomPort/SpinBox
 @onready var create_room_button : Button = $PanelContainer/VBoxContainer/Button
 
 signal create_room(name:String, password:String, port:int)
@@ -22,7 +23,7 @@ func _on_create_room_button_pressed() -> void:
 	create_room.emit(
 		room_name_lineedit.text,
 		room_password_lineedit.text,
-		int(room_port_lineedit.text)
+		room_port_spinbox.value
 	)
 "
 
@@ -42,6 +43,7 @@ func _on_button_eye_toggled(toggle):
 "
 
 [node name="Host a room" type="PanelContainer"]
+theme = ExtResource("1_ui1uh")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ijun1")
 script = SubResource("GDScript_vmka4")
 metadata/_tab_index = 1
@@ -121,11 +123,12 @@ mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Port Number"
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/HBoxRoomPort"]
+[node name="SpinBox" type="SpinBox" parent="PanelContainer/VBoxContainer/HBoxRoomPort"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "8999"
-placeholder_text = "ex: 8999"
+min_value = 1.0
+max_value = 25000.0
+value = 8999.0
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

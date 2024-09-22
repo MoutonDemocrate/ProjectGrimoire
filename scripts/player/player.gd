@@ -8,7 +8,7 @@ class_name Player
 ## Charge : used to hover, and for other movement options.
 @export_range(0,100,0.001,"or_greater") var charge : float = 1.0
 ## Mana : used to cast spells.
-@export_range(0,100,1,"or_greater") var mana : int = 0
+@export_range(0,100,1,"or_greater") var mana : int = 5
 ## Player health : if it reaches 0, the player dies.
 @export_range(0,100,1,"or_greater") var health : int = 10
 

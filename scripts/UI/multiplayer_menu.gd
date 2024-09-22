@@ -4,7 +4,7 @@ extends Control
 @onready var tabcont_join_host : TabContainer = $TabContainer/TabContainerJoinHost
 
 @onready var host_panel : PanelContainer = $"TabContainer/TabContainerJoinHost/Host A Room"
-@onready var join_panel : PanelContainer = $"TabContainer/TabContainerJoinHost/Join A Room"
+@onready var join_panel : VBoxContainer = $"TabContainer/TabContainerJoinHost/Join A Room"
 @onready var room_menu : RoomMenu = $TabContainer/RoomMenu
 
 
@@ -20,7 +20,9 @@ func _on_host_pressed(room_name:String, password:String, port:int) -> void:
 	room_info.port = port
 
 	room_menu.room_info = room_info
+	room_menu.vbox_room_settings.set_multiplayer_authority(1,true)
 	tabcont_base.current_tab = 1
+	print("Creating room with RoomInfo=",room_info)
 
 func _on_join_pressed(ip:String,port:int) -> void :
 	pass

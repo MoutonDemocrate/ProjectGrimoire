@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvlvih23yskq5"]
+[gd_scene load_steps=6 format=3 uid="uid://bvlvih23yskq5"]
 
 [ext_resource type="Script" path="res://scripts/UI/room_menu.gd" id="1_k6qgn"]
 [ext_resource type="PackedScene" uid="uid://ce3abytaw7xey" path="res://scenes/ui/RoomPlayer.tscn" id="2_dkbix"]
-[ext_resource type="PackedScene" uid="uid://c6d5l3plqjaoj" path="res://scenes/ui/h_box_info.tscn" id="3_ag4xu"]
 
 [sub_resource type="GDScript" id="GDScript_igaux"]
 resource_name = "PanelCointainerChat"
@@ -84,27 +83,27 @@ placeholder_text = "Send a message !"
 layout_mode = 2
 text = "Send"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxRoomSettings" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxRoomSettings"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Room & Game Settings
 "
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -112,7 +111,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_s2j4e")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -121,20 +120,29 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 0
 
-[node name="VBoxInfo" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="VBoxInfo" type="VBoxContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxInfoName" parent="HBoxContainer/VBoxContainer2/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo" instance=ExtResource("3_ag4xu")]
+[node name="HBoxInfoName" type="HBoxContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo"]
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoName"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Room Name : "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoName"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxRoomSettings"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2/PanelContainer2"]
+[node name="Button" type="Button" parent="HBoxContainer/VBoxRoomSettings/PanelContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Start !"

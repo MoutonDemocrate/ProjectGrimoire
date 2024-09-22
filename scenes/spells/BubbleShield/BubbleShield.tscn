@@ -1,70 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqgekadqkk04m"]
+[gd_scene load_steps=4 format=3 uid="uid://cqgekadqkk04m"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5gbma"]
 radius = 1.5
 
-[sub_resource type="Shader" id="Shader_ddycx"]
-code = "shader_type spatial;
- 
-uniform vec4 main_color : source_color;
-uniform vec4 intersection_color : source_color;
-uniform float inv_stretch : hint_range(0.0, 1.0) = 0.1;
-uniform float near = 0.15;
-uniform float far = 300.0;
-uniform sampler2D noise;
-uniform float noise_strength = 7.0;
-uniform float time_strength = 3.0;
-
-uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear;
- 
-float linearize(float c_depth) {
-	c_depth = 2.0 * c_depth - 1.0;
-	return near * far / (far + c_depth * (near - far));
-}
-
-float fresnel(float amount, vec3 normal, vec3 view)
-{
-	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
-}
-
-
-void fragment()
-{
-	float zdepth = linearize(texture(DEPTH_TEXTURE, SCREEN_UV).x);
-	float zpos = linearize(FRAGCOORD.z);
-	float diff = zdepth - zpos;
-
-	EMISSION = mix(main_color, intersection_color, sin(UV.y*100.0/inv_stretch + texture(noise, vec2(0.0,UV.y))*noise_strength + TIME*time_strength)).rgb;
-	ALPHA = fresnel(3.0,NORMAL,VIEW) + 1.0 - clamp(diff,0.0,1.0);
-	ALBEDO = vec3(0.0);
-
-}"
-
-[sub_resource type="Gradient" id="Gradient_kbfea"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5pwxk"]
-frequency = 0.2046
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8jv2"]
-color_ramp = SubResource("Gradient_kbfea")
-noise = SubResource("FastNoiseLite_5pwxk")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lq01d"]
-render_priority = 0
-shader = SubResource("Shader_ddycx")
-shader_parameter/main_color = Color(0.439216, 0.776471, 1, 1)
-shader_parameter/intersection_color = Color(0.266667, 0.65098, 1, 1)
-shader_parameter/inv_stretch = 0.415
-shader_parameter/near = 0.15
-shader_parameter/far = 300.0
-shader_parameter/noise_strength = 5.505
-shader_parameter/time_strength = 9.915
-shader_parameter/noise = SubResource("NoiseTexture2D_g8jv2")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qoo83"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_pdmpe"]
-material = SubResource("ShaderMaterial_lq01d")
+material = SubResource("StandardMaterial3D_qoo83")
 radius = 1.5
 height = 3.0
+radial_segments = 24
+rings = 16
 
 [node name="BubbleShield" type="Area3D"]
 
