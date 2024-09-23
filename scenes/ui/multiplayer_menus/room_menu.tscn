@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvlvih23yskq5"]
+[gd_scene load_steps=8 format=3 uid="uid://bvlvih23yskq5"]
 
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_im1te"]
 [ext_resource type="Script" path="res://scripts/UI/room_menu.gd" id="1_k6qgn"]
-[ext_resource type="PackedScene" uid="uid://ce3abytaw7xey" path="res://scenes/ui/RoomPlayer.tscn" id="2_dkbix"]
+[ext_resource type="PackedScene" uid="uid://c31imsut1i35q" path="res://scenes/ui/PlayerSpan.tscn" id="3_swpdc"]
 
 [sub_resource type="GDScript" id="GDScript_igaux"]
 resource_name = "PanelCointainerChat"
@@ -15,12 +16,15 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2j4e"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rdtuk"]
+
 [node name="RoomMenu" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_im1te")
 script = ExtResource("1_k6qgn")
 metadata/_tab_index = 1
 
@@ -39,9 +43,8 @@ size_flags_vertical = 3
 [node name="VBoxPlayerList" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList"]
 layout_mode = 2
 
-[node name="RoomPlayerTest" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList" instance=ExtResource("2_dkbix")]
+[node name="PlayerSpan" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList" instance=ExtResource("3_swpdc")]
 layout_mode = 2
-host = false
 
 [node name="PanelContainerChat" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -130,12 +133,92 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoName"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Room Name : "
+text = "Room Name"
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoName"]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoName"]
+layout_mode = 2
+theme = ExtResource("1_im1te")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoName"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rdtuk")
+vertical_scroll_mode = 0
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoName/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Arcane Parking Lot and the rest of the thing"
+horizontal_alignment = 2
+
+[node name="HBoxInfoPassword" type="HBoxContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPassword"]
+layout_mode = 2
+text = "Password"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPassword"]
+layout_mode = 2
+theme = ExtResource("1_im1te")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPassword"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rdtuk")
+vertical_scroll_mode = 0
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPassword/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "None"
+horizontal_alignment = 2
+
+[node name="HBoxInfoIP" type="HBoxContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoIP"]
+layout_mode = 2
+text = "IP Address"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoIP"]
+layout_mode = 2
+theme = ExtResource("1_im1te")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoIP"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rdtuk")
+vertical_scroll_mode = 0
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoIP/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "255.0.0.0"
+horizontal_alignment = 2
+
+[node name="HBoxInfoPort" type="HBoxContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPort"]
+layout_mode = 2
+text = "Port"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPort"]
+layout_mode = 2
+theme = ExtResource("1_im1te")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPort"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rdtuk")
+vertical_scroll_mode = 0
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoPort/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "8999"
+horizontal_alignment = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxRoomSettings"]
 layout_mode = 2

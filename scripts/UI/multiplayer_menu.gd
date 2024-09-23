@@ -7,6 +7,7 @@ extends Control
 @onready var join_panel : VBoxContainer = $"TabContainer/TabContainerJoinHost/Join A Room"
 @onready var room_menu : RoomMenu = $TabContainer/RoomMenu
 
+const player_span_scene : PackedScene = preload("res://scenes/ui/PlayerSpan.tscn")
 
 func _ready() -> void:
 	host_panel.create_room.connect(_on_host_pressed)
@@ -23,6 +24,13 @@ func _on_host_pressed(room_name:String, password:String, port:int) -> void:
 	room_menu.vbox_room_settings.set_multiplayer_authority(1,true)
 	tabcont_base.current_tab = 1
 	print("Creating room with RoomInfo=",room_info)
+	var player_span : PlayerSpan = player_span_scene.instantiate()
+	room_menu.add_player_span(player_span)
+	player_span.host = true
+	player_span.deck = Deck.DEFAULT_DECK
+	player_span.player_name = "Hostman"
+	player_span.player_title = "The Dev"
+	print("Tout va bieng???")
 
 func _on_join_pressed(ip:String,port:int) -> void :
 	pass

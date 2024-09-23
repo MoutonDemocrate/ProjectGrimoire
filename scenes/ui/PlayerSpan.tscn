@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://c31imsut1i35q"]
+
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_wpo5p"]
+[ext_resource type="PackedScene" uid="uid://eyvxmkqfdil" path="res://scenes/ui/deck_panel.tscn" id="2_htbon"]
+[ext_resource type="Script" path="res://scripts/UI/PlayerSpan.gd" id="2_w8ujt"]
+
+[node name="PlayerSpan" type="HBoxContainer"]
+offset_right = 493.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+theme = ExtResource("1_wpo5p")
+theme_override_constants/separation = 32
+script = ExtResource("2_w8ujt")
+
+[node name="LabelRoomTitle" type="Label" parent="."]
+texture_filter = 2
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Guest"
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Player"
+
+[node name="LabelPlayerTitle" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
+text = "Apprentice"
+
+[node name="DeckPanel" parent="." instance=ExtResource("2_htbon")]
+layout_mode = 2
