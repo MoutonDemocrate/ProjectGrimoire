@@ -59,3 +59,7 @@ func increment_mana(amount:=1):
 	mana += amount
 	mana_changed.emit(mana-amount, mana)
 	print("Mana is now : ", mana)
+
+func damage(damage : Damage) -> void :
+	# for status in status_manager :
+		pass
