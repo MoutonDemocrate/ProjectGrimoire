@@ -1,4 +1,4 @@
-extends State
+extends PhysicsState
 
 @onready var player : Player = $"../.."
 
