@@ -1,14 +1,5 @@
 extends State
-class_name StatePhysics
-
-func ready() -> void :
-	pass
-
-func left(new_state : State) :
-	state_left.emit()
-
-func entered(old_state : State) :
-	state_entered.emit()
+class_name PhysicsState
 
 func state_input(event : InputEvent) :
 	pass

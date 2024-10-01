@@ -46,7 +46,7 @@ height = 1.67188
 
 [sub_resource type="GDScript" id="GDScript_yi5eu"]
 resource_name = "MovingState"
-script/source = "extends StatePhysics
+script/source = "extends PhysicsState
 
 @onready var player : Player = $\"../..\"
 
@@ -67,7 +67,7 @@ func state_physics(_delta) -> void :
 
 [sub_resource type="GDScript" id="GDScript_6qjc7"]
 resource_name = "JumpChargeState"
-script/source = "extends StatePhysics
+script/source = "extends PhysicsState
 
 @onready var player : Player = $\"../..\"
 
