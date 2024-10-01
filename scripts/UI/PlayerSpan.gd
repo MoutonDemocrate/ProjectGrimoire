@@ -2,6 +2,8 @@
 class_name PlayerSpan
 extends HBoxContainer
 
+const DEFAULT_SPAN_SCENE : PackedScene = preload("res://scenes/ui/PlayerSpan.tscn")
+
 @onready var label_room_title : Label = $LabelRoomTitle
 @onready var label_name : Label = $LabelName
 @onready var label_player_title : Label = $LabelPlayerTitle

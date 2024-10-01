@@ -44,7 +44,12 @@ size_flags_vertical = 3
 layout_mode = 2
 
 [node name="PlayerSpan" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList" instance=ExtResource("3_swpdc")]
+visible = false
 layout_mode = 2
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList"]
+_spawnable_scenes = PackedStringArray("res://scenes/ui/PlayerSpan.tscn")
+spawn_path = NodePath("..")
 
 [node name="PanelContainerChat" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2

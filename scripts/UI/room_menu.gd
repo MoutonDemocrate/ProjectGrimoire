@@ -27,11 +27,19 @@ func _ready() -> void:
 	password_label.get_parent_control().mouse_entered.connect(func(): password_label.text = room_info.password if room_info.password else "None")
 	password_label.get_parent_control().mouse_exited.connect(func(): password_label.text = "*".repeat(room_info.password.length()) if room_info.password else "None")
 
-func add_player_span(player_span : PlayerSpan) -> void :
-	player_list.add_child(player_span)
+#func add_player_span(player_span : PlayerSpan) -> void :
+	#player_list.add_child(player_span)
 
 class RoomInfo extends Resource :
 	var name : String = "Arcane Room"
 	var ip : String = "127.0.0.1"
 	var port : int = 8999
 	var password : String = ""
+	
+	func _to_string() -> String:
+		return "({name} at {ip}, {port}, #{psw})".format({
+				"name" : name,
+				"ip" : ip,
+				"port" : port,
+				"psw" : password
+			})

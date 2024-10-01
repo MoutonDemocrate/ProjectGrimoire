@@ -1,31 +1,17 @@
-[gd_resource type="ArrayMesh" load_steps=6 format=3 uid="uid://b36v4rsbirkdf"]
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://b36v4rsbirkdf"]
 
-[ext_resource type="Shader" path="res://assets/shaders/MagicDartProj.gdshader" id="1_uql7r"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwnxg"]
 
-[sub_resource type="Gradient" id="Gradient_we1li"]
-offsets = PackedFloat32Array(0.0263158, 0.210526, 1)
-colors = PackedColorArray(0.000303218, 5.78466e-05, 0, 1, 0.204017, 0.000231292, 0.291577, 1, 0.831611, 0.129414, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_12o6s"]
-gradient = SubResource("Gradient_we1li")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnr1g"]
-render_priority = 0
-shader = ExtResource("1_uql7r")
-shader_parameter/size = 0.405
-shader_parameter/power = 4.483
-shader_parameter/gradient = SubResource("GradientTexture1D_12o6s")
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_in5aj"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_don0y"]
 _surfaces = [{
 "aabb": AABB(-0.866025, -4.33333, -1, 1.73205, 5.33333, 2),
 "format": 34896613377,
 "index_count": 36,
-"index_data": PackedByteArray(0, 0, 1, 0, 6, 0, 1, 0, 2, 0, 6, 0, 2, 0, 3, 0, 6, 0, 3, 0, 4, 0, 6, 0, 5, 0, 7, 0, 0, 0, 4, 0, 5, 0, 6, 0, 5, 0, 0, 0, 6, 0, 0, 0, 7, 0, 1, 0, 4, 0, 7, 0, 5, 0, 3, 0, 7, 0, 4, 0, 2, 0, 7, 0, 3, 0, 1, 0, 7, 0, 2, 0),
+"index_data": PackedByteArray("AAABAAYAAQACAAYAAgADAAYAAwAEAAYABQAHAAAABAAFAAYABQAAAAYAAAAHAAEABAAHAAUAAwAHAAQAAgAHAAMAAQAHAAIA"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 8,
-"vertex_data": PackedByteArray(255, 127, 255, 159, 0, 0, 0, 0, 255, 255, 255, 159, 255, 63, 0, 0, 255, 255, 255, 159, 255, 191, 0, 0, 255, 127, 255, 159, 255, 255, 0, 0, 0, 0, 255, 159, 255, 191, 0, 0, 0, 0, 255, 159, 255, 63, 0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0)
+"vertex_data": PackedByteArray("/3//nwAAAAD///+f/z8AAP///5//vwAA/3//n///AAAAAP+f/78AAAAA/5//PwAA/3////9/AAD/fwAA/38AAA==")
 }]
 blend_shape_mode = 0
 
@@ -33,16 +19,15 @@ blend_shape_mode = 0
 resource_name = "projectiles_Cone"
 _surfaces = [{
 "aabb": AABB(-0.866025, -4.33333, -1, 1.73205, 5.33333, 2),
-"attribute_data": PackedByteArray(255, 63, 142, 130, 52, 117, 71, 161, 52, 117, 183, 222, 255, 63, 111, 253, 202, 10, 183, 222, 202, 10, 71, 161, 255, 63, 255, 191, 202, 10, 71, 161, 202, 10, 183, 222, 255, 63, 142, 130, 255, 63, 111, 253, 52, 117, 71, 161, 52, 117, 183, 222),
+"attribute_data": PackedByteArray("/z+OgjR1R6E0dbfe/z9v/coKt97KCkeh/z//v8oKR6HKCrfe/z+Ogv8/b/00dUehNHW33g=="),
 "format": 34896613399,
 "index_count": 36,
-"index_data": PackedByteArray(0, 0, 1, 0, 6, 0, 1, 0, 2, 0, 6, 0, 2, 0, 3, 0, 6, 0, 3, 0, 4, 0, 6, 0, 5, 0, 7, 0, 0, 0, 4, 0, 5, 0, 6, 0, 5, 0, 0, 0, 6, 0, 0, 0, 9, 0, 1, 0, 4, 0, 8, 0, 5, 0, 3, 0, 10, 0, 4, 0, 2, 0, 12, 0, 3, 0, 1, 0, 11, 0, 2, 0),
-"material": SubResource("ShaderMaterial_qnr1g"),
-"name": "Dart",
+"index_data": PackedByteArray("AAABAAYAAQACAAYAAgADAAYAAwAEAAYABQAHAAAABAAFAAYABQAAAAYAAAAJAAEABAAIAAUAAwAKAAQAAgAMAAMAAQALAAIA"),
+"material": SubResource("StandardMaterial3D_fwnxg"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray(255, 127, 255, 159, 0, 0, 214, 252, 255, 255, 255, 159, 255, 63, 33, 229, 255, 255, 255, 159, 255, 191, 238, 191, 255, 127, 255, 159, 255, 255, 39, 131, 0, 0, 255, 159, 255, 191, 238, 191, 0, 0, 255, 159, 255, 63, 33, 229, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191, 255, 255, 255, 127, 8, 185, 210, 87, 105, 162, 101, 87, 255, 255, 255, 127, 100, 215, 149, 221, 210, 215, 245, 198, 255, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127)
+"vertex_data": PackedByteArray("/3//nwAA1vz///+f/z8h5f///5//v++//3//n///J4MAAP+f/7/vvwAA/5//PyHl/3////9//7//fwAA/3//P/9/AAD/f/8//38AAP9//z//fwAA/3//P/9/AAD/f/8//38AAP9//z////9/CLnSV2miZVf///9/ZNeV3dLX9cb///9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_in5aj")
+shadow_mesh = SubResource("ArrayMesh_don0y")
