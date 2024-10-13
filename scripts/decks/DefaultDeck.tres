@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/decks/Deck.gd" id="1_cwegd"]
 [ext_resource type="Script" path="res://scripts/spells/spell.gd" id="2_nf6av"]
-[ext_resource type="Resource" uid="uid://d020jspfg50kr" path="res://scenes/spells/MagicDart/MagicDart.res" id="3_beu7n"]
-[ext_resource type="Resource" uid="uid://dpq5xoba7pl0q" path="res://scenes/spells/Claymore/Claymore.res" id="4_oghla"]
-[ext_resource type="Resource" uid="uid://c2yp5ksxxxsbs" path="res://scenes/spells/BubbleShield/BubbleShield.res" id="5_pr1li"]
+[ext_resource type="Resource" uid="uid://d020jspfg50kr" path="res://scenes/spells/dart/MagicDart.res" id="3_beu7n"]
+[ext_resource type="Resource" uid="uid://dpq5xoba7pl0q" path="res://scenes/spells/claymore/Claymore.res" id="4_oghla"]
+[ext_resource type="Resource" uid="uid://c2yp5ksxxxsbs" path="res://scenes/spells/bubble_shield/BubbleShield.res" id="5_pr1li"]
 
 [resource]
 script = ExtResource("1_cwegd")

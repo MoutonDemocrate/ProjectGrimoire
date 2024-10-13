@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://ci4dnh53elxwc"]
 
-[ext_resource type="Script" path="res://scenes/spells/Claymore/Claymore.gd" id="1_5wugp"]
+[ext_resource type="Script" path="res://scenes/spells/claymore/Claymore.gd" id="1_5wugp"]
 [ext_resource type="ArrayMesh" uid="uid://rn6c4s7or6th" path="res://assets/models/Claymore2.obj" id="2_g0w2s"]
 [ext_resource type="Texture2D" uid="uid://dpho426cbt3us" path="res://assets/textures/spells/particles/4star.png" id="3_iwxrd"]
 

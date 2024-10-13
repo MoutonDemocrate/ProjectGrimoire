@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player/PlayerMachine.gd" id="3_lv7hx"]
 [ext_resource type="Script" path="res://scripts/player/UILayer.gd" id="3_ri08k"]
 [ext_resource type="Script" path="res://scripts/player/states/AirState.gd" id="4_68lsh"]
-[ext_resource type="PackedScene" uid="uid://rs2sx451mwo8" path="res://scenes/spells/SpellCard.tscn" id="4_fj2tm"]
+[ext_resource type="PackedScene" uid="uid://rs2sx451mwo8" path="res://scenes/ui/SpellCard.tscn" id="4_fj2tm"]
 [ext_resource type="Script" path="res://scripts/spells/SpellManager.gd" id="4_w1ps3"]
 [ext_resource type="Script" path="res://scripts/player/states/GlideState.gd" id="5_2wnee"]
 

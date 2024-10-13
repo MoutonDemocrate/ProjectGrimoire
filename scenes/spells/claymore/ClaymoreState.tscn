@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwrr0j2hfie1i"]
 
-[ext_resource type="Script" path="res://scenes/spells/Claymore/ClaymoreState.gd" id="1_umnek"]
+[ext_resource type="Script" path="res://scenes/spells/claymore/ClaymoreState.gd" id="1_umnek"]
 
 [node name="ClaymoreState" type="Node"]
 script = ExtResource("1_umnek")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://rs2sx451mwo8"]
 
 [ext_resource type="Script" path="res://scripts/spells/SpellCard.gd" id="1_uv2nj"]
-[ext_resource type="Resource" uid="uid://uomd5bk7sanq" path="res://scenes/spells/Empty.tres" id="2_nrvsb"]
+[ext_resource type="Resource" uid="uid://uomd5bk7sanq" path="res://scenes/spells/empty.tres" id="2_nrvsb"]
 [ext_resource type="FontFile" uid="uid://brupi4v3fs6wu" path="res://assets/fonts/vinque rg.otf" id="3_wbe14"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmdo7"]

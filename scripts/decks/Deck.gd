@@ -53,3 +53,21 @@ func sort() -> Error :
 			new_spells.append(spells[i])
 
 	return OK
+
+## Parses Deck to Dictionnary
+func to_dict() -> Dictionary :
+	return {
+		"name" : name,
+		"description" : description,
+		"max_size" : max_size,
+		"spells" : spells.map(func(element:Spell):return element.id)
+	}
+	
+## Parses Dictionnary to Deck
+static func from_dict(dict : Dictionary) -> Deck :
+	var deck : Deck = Deck.new()
+	deck.name = dict["name"] if "name" in dict.keys() else "Unnamed Deck"
+	deck.description = dict["description"] if "description" in dict.keys() else "No description."
+	deck.max_size = dict["max_size"] if "max_size" in dict.keys() else 15
+	deck.spells = ((dict["spells"] as Array[String]).map(func(el):return Spell.from_id(el))) if "spells" in dict.keys() else []
+	return deck

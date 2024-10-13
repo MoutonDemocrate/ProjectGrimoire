@@ -64,7 +64,7 @@ func peer_connected(id : int) -> void :
 
 
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func sync_spans(span_array:Array) -> Error :
 	# TO ALL CLIENTS
 	# HERE ARE THE PLAYER SPANS, PLEASE ADD THEM ALL THERE

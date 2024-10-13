@@ -14,28 +14,16 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	print("PlayerSpan is ready !")
 
-@export var host : bool = false :
-	set(p_host):
+@export var player_info : PlayerInfo = PlayerInfo.DEFAULT :
+	set(new) :
 		if not Engine.is_editor_hint() :
 			await ready
-		host = p_host
-		if host :
-			label_room_title.add_theme_color_override("font_color", Color.RED)
-		else :
-			label_room_title.add_theme_color_override("font_color", Color.GREEN)
 		if self.is_node_ready() :
-			label_room_title.text = "Host" if p_host else "Guest"
-
-@export var player_name : String = "Player" :
-	set(p_player_name):
-		player_name = p_player_name
-		if self.is_node_ready() :
-			label_name.text = p_player_name
-
-@export var player_title : String = "Apprentice" :
-	set(p_player_title):
-		player_title = p_player_title
-		if self.is_node_ready() :
-			label_player_title.text = p_player_title
-
-@export var deck : Deck = Deck.DEFAULT_DECK
+			if new.host :
+				label_room_title.add_theme_color_override("font_color", Color.RED)
+			else :
+				label_room_title.add_theme_color_override("font_color", Color.GREEN)
+			label_room_title.text = "Host" if new.host else "Guest"
+			label_name.text = new.player_name
+			label_player_title.text = new.player_title
+		player_info = new

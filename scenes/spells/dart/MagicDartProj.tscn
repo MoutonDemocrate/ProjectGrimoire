@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://cj8pbkdp6ykn8"]
 
-[ext_resource type="Script" path="res://scenes/spells/MagicDart/MagicDartProj.gd" id="1_0o5xl"]
-[ext_resource type="ArrayMesh" uid="uid://b36v4rsbirkdf" path="res://scenes/spells/MagicDart/MagicDartModel.tres" id="1_tlniq"]
+[ext_resource type="Script" path="res://scenes/spells/dart/MagicDartProj.gd" id="1_0o5xl"]
+[ext_resource type="ArrayMesh" uid="uid://b36v4rsbirkdf" path="res://scenes/spells/dart/MagicDartModel.tres" id="1_tlniq"]
 [ext_resource type="Texture2D" uid="uid://c2qq8g8gprerb" path="res://assets/textures/spells/circles/dart.svg" id="2_ts0uq"]
 
 [sub_resource type="Gradient" id="Gradient_m784o"]
