@@ -1,8 +1,8 @@
 [gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://b36v4rsbirkdf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwnxg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1cwj"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_don0y"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_x7j4f"]
 _surfaces = [{
 "aabb": AABB(-0.866025, -4.33333, -1, 1.73205, 5.33333, 2),
 "format": 34896613377,
@@ -23,11 +23,11 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAYAAQACAAYAAgADAAYAAwAEAAYABQAHAAAABAAFAAYABQAAAAYAAAAJAAEABAAIAAUAAwAKAAQAAgAMAAMAAQALAAIA"),
-"material": SubResource("StandardMaterial3D_fwnxg"),
+"material": SubResource("StandardMaterial3D_a1cwj"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
 "vertex_data": PackedByteArray("/3//nwAA1vz///+f/z8h5f///5//v++//3//n///J4MAAP+f/7/vvwAA/5//PyHl/3////9//7//fwAA/3//P/9/AAD/f/8//38AAP9//z//fwAA/3//P/9/AAD/f/8//38AAP9//z////9/CLnSV2miZVf///9/ZNeV3dLX9cb///9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_don0y")
+shadow_mesh = SubResource("ArrayMesh_x7j4f")

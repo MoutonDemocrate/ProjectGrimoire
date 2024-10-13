@@ -23,6 +23,7 @@ config/icon="res://assets/textures/logo/MC_logo_res_half.png"
 
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 NetworkUtils="*res://scripts/globals/NetworkUtils.gd"
+GeneralUtils="*res://scripts/globals/GeneralUtils.gd"
 
 [display]
 
