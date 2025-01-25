@@ -1,3 +1,5 @@
+@tool
+extends Resource
 class_name PlayerInfo
 
 @export var host : bool = false :

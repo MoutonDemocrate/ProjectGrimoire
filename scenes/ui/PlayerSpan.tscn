@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c31imsut1i35q"]
+[gd_scene load_steps=7 format=3 uid="uid://c31imsut1i35q"]
 
 [ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_wpo5p"]
 [ext_resource type="PackedScene" uid="uid://eyvxmkqfdil" path="res://scenes/ui/deck_panel.tscn" id="2_htbon"]
 [ext_resource type="Script" path="res://scripts/UI/PlayerSpan.gd" id="2_w8ujt"]
+[ext_resource type="Resource" uid="uid://c6y2xaicuhdgm" path="res://scripts/decks/DefaultDeck.tres" id="3_wg42t"]
+[ext_resource type="Script" path="res://scripts/game/PlayerInfo.gd" id="4_xs52o"]
+
+[sub_resource type="Resource" id="Resource_6u0o3"]
+script = ExtResource("4_xs52o")
+host = false
+player_name = "Player"
+player_title = "Apprentice"
+deck = ExtResource("3_wg42t")
 
 [node name="PlayerSpan" type="HBoxContainer"]
 offset_right = 493.0
@@ -11,6 +20,7 @@ size_flags_horizontal = 3
 theme = ExtResource("1_wpo5p")
 theme_override_constants/separation = 32
 script = ExtResource("2_w8ujt")
+player_info = SubResource("Resource_6u0o3")
 
 [node name="LabelRoomTitle" type="Label" parent="."]
 texture_filter = 2

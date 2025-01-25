@@ -19,5 +19,10 @@ const DEFAULT_SETTINGS = preload("res://assets/game/DefaultGameSettings.tres")
 
 ## Number of upgrades for each player during upgrade phases. [br]
 ## [br]
-## [color=orange][b]/!\ Warning /!\[/b][/color] : must be higher than [member player_count][code] * [/code][member upgrade_pick_amount]
+## [color=orange][b]/!\ Warning /!\[/b][/color] : must be higher than [code]player_count * [/code][member upgrade_pick_amount]
 @export var upgrade_pick_amount : int = 3
+
+## Number of teams in the game. [br]
+## If left to [code]0[/code] or [code]1[/code], the game will be a free-for-all,
+## and will (behind the scenes) create a team for each player.
+@export var number_of_teams : int = 0
