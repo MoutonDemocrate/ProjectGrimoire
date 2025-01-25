@@ -6,7 +6,7 @@ class_name SpellCard
 @onready var panel : Panel = $Panel
 @onready var label : Label = $Label
 
-@export var spell : Spell = load("res://scenes/spells/Empty.tres") :
+@export var spell : Spell = load("res://scenes/spells/empty.tres") :
 	set(new_spell) :
 		spell = new_spell
 		if is_node_ready() :

@@ -6,12 +6,12 @@ script/source = "extends State
 
 @onready var player : Player
 
-var SPELL : Spell = load(\"res://scenes/spells/MagicDart/MagicDart.res\")
+var SPELL : Spell = preload(\"res://scenes/spells/dart/MagicDart.res\")
 
 var cast_slot : int
 
 func entered(old_state):
-	var dart : Node3D = load(\"res://scenes/spells/MagicDart/MagicDartProj.tscn\").instantiate()
+	var dart : Node3D = load(\"res://scenes/spells/dart/MagicDartProj.tscn\").instantiate()
 	print(\"TEST Instantiated.\")
 	dart.target = player.target
 	dart.caster = player

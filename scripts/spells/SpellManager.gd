@@ -5,21 +5,21 @@ class_name SpellManager
 
 var spells : Array[Spell] = [SPELL_EMPTY,SPELL_EMPTY,SPELL_EMPTY,SPELL_EMPTY,SPELL_EMPTY,SPELL_EMPTY]
 
-const SPELL_EMPTY : Spell = preload("res://scenes/spells/Empty.tres")
+const SPELL_EMPTY : Spell = preload("res://scenes/spells/empty.tres")
 
 func _ready():
 	await player.ready
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
-	add_spell(load("res://scenes/spells/MagicDart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/dart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/dart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/dart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/dart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/dart/MagicDart.res"))
+	add_spell(load("res://scenes/spells/dart/MagicDart.res"))
 	refresh_spells()
 
 func refresh_spells() -> void :
 	for i in range(1,6) :
-		print(player.ui_layer.spell_container.get_child(i-1).spell.id)
+		#print(player.ui_layer.spell_container.get_child(i-1).spell.id)
 		if player.ui_layer.spell_container.get_child(i-1).spell.id == "empty"  :
 			player.ui_layer.spell_container.get_child(i-1).spell = player.ui_layer.spell_container.get_child(i).spell
 			player.ui_layer.spell_container.get_child(i).spell = SPELL_EMPTY

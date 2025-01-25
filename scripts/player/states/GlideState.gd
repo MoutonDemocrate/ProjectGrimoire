@@ -2,7 +2,7 @@ extends PhysicsState
 
 @onready var player : Player = $"../.."
 
-func physics(_delta):
+func state_physics(_delta):
 	player.flat_direction = Input.get_vector("left","right","forward","backward").rotated(-player.spring_arm_rot).normalized()
 	player.velocity.x = lerpf(player.velocity.x, player.flat_direction.x * player.speed/2, player.acceleration*_delta/4)
 	player.velocity.z = lerpf(player.velocity.z, player.flat_direction.y * player.speed/2, player.acceleration*_delta/4)

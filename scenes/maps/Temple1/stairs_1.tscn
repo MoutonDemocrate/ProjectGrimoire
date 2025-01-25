@@ -5,8 +5,8 @@
 [ext_resource type="ArrayMesh" uid="uid://hqol1jjnq5ta" path="res://assets/models/terrain/models/stairs_1.res" id="3_xctyw"]
 [ext_resource type="Material" uid="uid://j6uhv280dc3l" path="res://assets/models/terrain/materials/Ancient Rock.tres" id="4_hiqhc"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wpobq"]
-points = PackedVector3Array(1.90801, 1.96971, -1.785, -1.9681, 2.03175, -1.71394, -1.58705, 0.952232, -1.9681, 1.90446, -1.9681, 0.952232, 1.52381, -1.46017, 2.03175, 1.84082, 1.01587, -2.03175, -1.90446, -1.52381, 2.03175, -1.33289, 2.03175, -1.46017, -1.84122, -2.03175, 1.07912, 1.92374, -1.92374, 1.92374, -1.90446, -0.0632435, -1.01587, 1.46017, 2.03175, -1.46017, -1.79062, 1.91402, -1.97592, 2.03175, -1.52381, 1.90446, -2.03175, -1.9681, 1.206, 1.46017, -1.52381, 0.444295, 2.03175, -1.90446, 1.01587, -1.79094, -1.97626, 1.91436, 1.9681, 1.9681, -1.52381, -1.90446, 0.507937, 0.0632435, -2.03175, 1.90446, -1.71394, -1.52341, -1.52381, 0.444295, -2.03175, -1.52381, 1.90446, 1.91295, 1.72776, -1.97481, 0.952232, 0.444295, -1.52381, 1.84082, -2.03175, 1.01587, 1.90446, 0.507937, 0.0632435, -1.52341, -1.46017, 2.03175, 1.96925, 1.7229, -1.90757, -1.90446, 0.507937, -1.52381, -1.14276, 1.01587, -2.03175, 1.78456, 1.96965, -1.90795)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b6d2i"]
+points = PackedVector3Array(2, 2, -2, 2, -2, 2, -2, -2, 2, -2, 2, -2, -2, 2, -1.5, 2, 2, -1.5, 2, -2, 1, -2, -2, 1, 2, -1.5, 2, -2, -1.5, 2, 2, 1, -2, -2, 1, -2)
 
 [node name="DestroyBody" type="StaticBody3D"]
 collision_layer = 3
@@ -22,7 +22,7 @@ visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("ConvexPolygonShape3D_wpobq")
+shape = SubResource("ConvexPolygonShape3D_b6d2i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 process_mode = 3

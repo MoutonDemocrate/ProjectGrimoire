@@ -21,8 +21,8 @@ func get_spell_list_paths() -> Array[String] :
 	]
 
 ## Finds spell from ID
-static func from_id(id : String) -> Spell :
-	match id :
+static func from_id(_id : String) -> Spell :
+	match _id :
 		"dart" : return load("res://scenes/spells/dart/MagicDart.res")
 		"bubble_shield" : return load("res://scenes/spells/bubble_shield/BubbleShield.res")
 		"claymore" : return load("res://scenes/spells/claymore/Claymore.res")
