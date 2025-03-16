@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvlvih23yskq5"]
+[gd_scene load_steps=10 format=3 uid="uid://bvlvih23yskq5"]
 
 [ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_im1te"]
-[ext_resource type="Script" path="res://scripts/UI/room_menu.gd" id="1_k6qgn"]
+[ext_resource type="Script" uid="uid://djcktlrgmu385" path="res://scripts/UI/room_menu.gd" id="1_k6qgn"]
 [ext_resource type="PackedScene" uid="uid://c31imsut1i35q" path="res://scenes/ui/PlayerSpan.tscn" id="3_swpdc"]
 
 [sub_resource type="GDScript" id="GDScript_igaux"]
@@ -17,6 +17,34 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2j4e"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rdtuk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugmk3"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.685203, 0.174761, 0.202115, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2qukl"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.409149, 0.0765419, 0.0943659, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_offset = Vector2(1, 2)
 
 [node name="RoomMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -48,7 +76,7 @@ visible = false
 layout_mode = 2
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList"]
-_spawnable_scenes = PackedStringArray("res://scenes/ui/PlayerSpan.tscn")
+_spawnable_scenes = PackedStringArray("uid://c31imsut1i35q")
 spawn_path = NodePath("..")
 
 [node name="PanelContainerChat" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
@@ -199,6 +227,9 @@ vertical_scroll_mode = 0
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxRoomSettings/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxInfo/HBoxInfoIP/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Click to copy"
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 text = "255.0.0.0"
 horizontal_alignment = 2
 
@@ -230,7 +261,19 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxRoomSettings/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxRoomSettings/PanelContainer2"]
 layout_mode = 2
+
+[node name="ButtonStart" type="Button" parent="HBoxContainer/VBoxRoomSettings/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 64
 text = "Start !"
+
+[node name="ButtonLeave" type="Button" parent="HBoxContainer/VBoxRoomSettings/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 64
+theme_override_styles/hover = SubResource("StyleBoxFlat_ugmk3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2qukl")
+text = "Leave"

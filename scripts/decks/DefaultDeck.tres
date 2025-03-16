@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Deck" load_steps=6 format=3 uid="uid://c6y2xaicuhdgm"]
 
-[ext_resource type="Script" path="res://scripts/decks/Deck.gd" id="1_cwegd"]
-[ext_resource type="Script" path="res://scripts/spells/spell.gd" id="2_nf6av"]
+[ext_resource type="Script" uid="uid://bbngy3t71p7nq" path="res://scripts/decks/Deck.gd" id="1_cwegd"]
+[ext_resource type="Script" uid="uid://3drousbgfw12" path="res://scripts/spells/spell.gd" id="2_nf6av"]
 [ext_resource type="Resource" uid="uid://d020jspfg50kr" path="res://scenes/spells/dart/MagicDart.res" id="3_beu7n"]
 [ext_resource type="Resource" uid="uid://dpq5xoba7pl0q" path="res://scenes/spells/claymore/Claymore.res" id="4_oghla"]
 [ext_resource type="Resource" uid="uid://c2yp5ksxxxsbs" path="res://scenes/spells/bubble_shield/BubbleShield.res" id="5_pr1li"]

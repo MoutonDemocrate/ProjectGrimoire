@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://hoad8ymf6rck"]
 
-[ext_resource type="Script" path="res://scenes/spells/bubble_shield/BubbleShieldState.gd" id="1_2vt5c"]
+[ext_resource type="Script" uid="uid://b1pq5483hnj8h" path="res://scenes/spells/bubble_shield/BubbleShieldState.gd" id="1_2vt5c"]
 
 [node name="BubbleShieldState" type="Node"]
 script = ExtResource("1_2vt5c")

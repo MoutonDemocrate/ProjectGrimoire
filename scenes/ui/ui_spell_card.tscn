@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dpf4qubj0hqka"]
 
-[ext_resource type="Script" path="res://scripts/UI/UISpellCard.gd" id="1_8swkl"]
+[ext_resource type="Script" uid="uid://bav48wrwcegii" path="res://scripts/UI/UISpellCard.gd" id="1_8swkl"]
 [ext_resource type="Texture2D" uid="uid://bjgg174ufhfnf" path="res://assets/textures/icons/spells/SpellCard.png" id="1_lh2d7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjy3b"]

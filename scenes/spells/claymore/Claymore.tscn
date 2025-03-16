@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://ci4dnh53elxwc"]
 
-[ext_resource type="Script" path="res://scenes/spells/claymore/Claymore.gd" id="1_5wugp"]
+[ext_resource type="Script" uid="uid://b3svwfjepoti2" path="res://scenes/spells/claymore/Claymore.gd" id="1_5wugp"]
 [ext_resource type="ArrayMesh" uid="uid://rn6c4s7or6th" path="res://assets/models/Claymore2.obj" id="2_g0w2s"]
 [ext_resource type="Texture2D" uid="uid://dpho426cbt3us" path="res://assets/textures/spells/particles/4star.png" id="3_iwxrd"]
 
@@ -52,10 +52,10 @@ default_input_values = [1, 0.25, 2, 0.75, 3, 0.0, 4, 1.0]
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
-uniform float Start : hint_range(0, 1) = 0.25;
-uniform float End : hint_range(0, 1) = 0.75;
+uniform float Start : hint_range(0.0, 1.0) = 0.25;
+uniform float End : hint_range(0.0, 1.0) = 0.75;
 uniform vec4 Color : source_color = vec4(0.000000, 0.707116, 0.621404, 1.000000);
-uniform float Strength = 1;
+uniform float Strength = 1.0;
 
 
 
@@ -179,7 +179,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.533037, 0.533037, 0.533037, 1)
 gradient = SubResource("Gradient_3g3df")
 
 [sub_resource type="Curve" id="Curve_rd6gb"]
-max_value = 6.95
+_limits = [0.0, 6.95, 0.0, 1.0]
 _data = [Vector2(0, 6.95), 0.0, 0.0, 0, 0, Vector2(0.309734, 6.95), 0.0, 0.0, 0, 0, Vector2(0.446903, 0), 0.0, 0.0, 0, 0, Vector2(0.530973, 6.95), 0.0, 0.0, 0, 0, Vector2(0.676991, 0), 0.0, 0.0, 0, 0, Vector2(0.734513, 6.87363), 0.0, 0.0, 0, 0, Vector2(0.836283, 0), 0.0, 0.0, 0, 0, Vector2(0.902655, 6.87363), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 9
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://eyvxmkqfdil"]
 
-[ext_resource type="Script" path="res://scripts/UI/DeckTooltipOwner.gd" id="1_bk4j8"]
+[ext_resource type="Script" uid="uid://brdr8uakdqm10" path="res://scripts/UI/DeckTooltipOwner.gd" id="1_bk4j8"]
 [ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_tknl3"]
 [ext_resource type="Texture2D" uid="uid://guwnih6usef4" path="res://assets/textures/icons/deck_white.png" id="2_qthmb"]
 

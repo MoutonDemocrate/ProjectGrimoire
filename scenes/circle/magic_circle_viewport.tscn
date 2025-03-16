@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bw4pkdr5yf0c2"]
 
-[ext_resource type="Shader" path="res://assets/shaders/magic_circle.gdshader" id="1_foxiu"]
+[ext_resource type="Shader" uid="uid://boevkb624fj6l" path="res://assets/shaders/magic_circle.gdshader" id="1_foxiu"]
 [ext_resource type="FontFile" uid="uid://brupi4v3fs6wu" path="res://assets/fonts/vinque rg.otf" id="2_cq8v0"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_n848s"]

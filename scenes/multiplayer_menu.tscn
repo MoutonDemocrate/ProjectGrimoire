@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_aw7x1"]
 [ext_resource type="Texture2D" uid="uid://4d2qerd03rba" path="res://assets/textures/icons/eye-regular-white.svg" id="2_r61p7"]
-[ext_resource type="PackedScene" uid="uid://ce3abytaw7xey" path="res://scenes/menus/RoomPlayer.tscn" id="3_egpsg"]
 [ext_resource type="PackedScene" uid="uid://c6d5l3plqjaoj" path="res://scenes/h_box_info.tscn" id="4_3qmmv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mo8xv"]
@@ -29,6 +28,9 @@ func _ready() -> void:
 func _on_button_eye_toggled(toggle):
 	lineedit.secret = toggle
 "
+
+[sub_resource type="Resource" id="Resource_qmag2"]
+metadata/__load_path__ = "res://scenes/menus/RoomPlayer.tscn"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2j4e"]
 content_margin_right = 16.0
@@ -259,7 +261,7 @@ size_flags_vertical = 3
 [node name="VBoxPlayerList" type="VBoxContainer" parent="TabContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelContainerPlayerList"]
 layout_mode = 2
 
-[node name="RoomPlayerTest" parent="TabContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList" instance=ExtResource("3_egpsg")]
+[node name="RoomPlayerTest" parent="TabContainer/PanelContainer/HBoxContainer/VBoxContainer/PanelContainerPlayerList/VBoxPlayerList"]
 layout_mode = 2
 
 [node name="PanelContainerChat" type="PanelContainer" parent="TabContainer/PanelContainer/HBoxContainer/VBoxContainer"]

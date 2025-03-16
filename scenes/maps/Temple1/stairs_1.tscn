@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://susd41w26rsf"]
 
-[ext_resource type="Script" path="res://scripts/terrain/DestroyBody.gd" id="1_0o3r5"]
+[ext_resource type="Script" uid="uid://ccpvhj6y60wq0" path="res://scripts/terrain/DestroyBody.gd" id="1_0o3r5"]
 [ext_resource type="PackedScene" uid="uid://cbof4jhsnelvy" path="res://assets/models/terrain/stairs_1_frac.glb" id="2_vgheg"]
 [ext_resource type="ArrayMesh" uid="uid://hqol1jjnq5ta" path="res://assets/models/terrain/models/stairs_1.res" id="3_xctyw"]
 [ext_resource type="Material" uid="uid://j6uhv280dc3l" path="res://assets/models/terrain/materials/Ancient Rock.tres" id="4_hiqhc"]

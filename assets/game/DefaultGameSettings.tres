@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="GameSettings" load_steps=2 format=3 uid="uid://bue7qdfrlbkd3"]
 
-[ext_resource type="Script" path="res://scripts/game/GameSettings.gd" id="1_qg1eg"]
+[ext_resource type="Script" uid="uid://u5omyssvrowj" path="res://scripts/game/GameSettings.gd" id="1_qg1eg"]
 
 [resource]
 script = ExtResource("1_qg1eg")
+preset_name = "Unnamed Preset"
+number_of_rounds = 3
+round_time = 0.0
+upgrade_pick_amount = 3
+number_of_teams = 0

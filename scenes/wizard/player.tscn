@@ -1,14 +1,14 @@
 [gd_scene load_steps=20 format=3 uid="uid://iymgug8qim0t"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_v5kjs"]
+[ext_resource type="Script" uid="uid://op2gskbrhte6" path="res://scripts/player/player.gd" id="1_v5kjs"]
 [ext_resource type="PackedScene" uid="uid://b3nijkc0o0ptt" path="res://scenes/wizard/wizard.tscn" id="2_048if"]
 [ext_resource type="FontFile" uid="uid://xs7xxon56nsf" path="res://assets/fonts/PossumSaltareNF.otf" id="2_ftacq"]
-[ext_resource type="Script" path="res://scripts/player/PlayerMachine.gd" id="3_lv7hx"]
-[ext_resource type="Script" path="res://scripts/player/UILayer.gd" id="3_ri08k"]
-[ext_resource type="Script" path="res://scripts/player/states/AirState.gd" id="4_68lsh"]
+[ext_resource type="Script" uid="uid://no2fq071eh6w" path="res://scripts/player/PlayerMachine.gd" id="3_lv7hx"]
+[ext_resource type="Script" uid="uid://bfoxeg0hqkb7l" path="res://scripts/player/UILayer.gd" id="3_ri08k"]
+[ext_resource type="Script" uid="uid://dcq05yorpdy6w" path="res://scripts/player/states/AirState.gd" id="4_68lsh"]
 [ext_resource type="PackedScene" uid="uid://rs2sx451mwo8" path="res://scenes/ui/SpellCard.tscn" id="4_fj2tm"]
-[ext_resource type="Script" path="res://scripts/spells/SpellManager.gd" id="4_w1ps3"]
-[ext_resource type="Script" path="res://scripts/player/states/GlideState.gd" id="5_2wnee"]
+[ext_resource type="Script" uid="uid://c83qgb21g68ee" path="res://scripts/spells/SpellManager.gd" id="4_w1ps3"]
+[ext_resource type="Script" uid="uid://jbrylsxyifpm" path="res://scripts/player/states/GlideState.gd" id="5_2wnee"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_u5d14"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://be7elupiyjrjp"]
 
-[ext_resource type="Script" path="res://scripts/terrain/DestroyBody.gd" id="1_3vy2o"]
+[ext_resource type="Script" uid="uid://ccpvhj6y60wq0" path="res://scripts/terrain/DestroyBody.gd" id="1_3vy2o"]
 [ext_resource type="PackedScene" uid="uid://dn00trcml343y" path="res://assets/models/terrain/half_bloc_1_frac.glb" id="2_oh610"]
 [ext_resource type="ArrayMesh" uid="uid://cpggm0665ajlt" path="res://assets/models/terrain/models/half_bloc_1.res" id="3_nnjcf"]
 

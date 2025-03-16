@@ -2,9 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_wpo5p"]
 [ext_resource type="PackedScene" uid="uid://eyvxmkqfdil" path="res://scenes/ui/deck_panel.tscn" id="2_htbon"]
-[ext_resource type="Script" path="res://scripts/UI/PlayerSpan.gd" id="2_w8ujt"]
+[ext_resource type="Script" uid="uid://b7oah5qex3ti4" path="res://scripts/UI/PlayerSpan.gd" id="2_w8ujt"]
 [ext_resource type="Resource" uid="uid://c6y2xaicuhdgm" path="res://scripts/decks/DefaultDeck.tres" id="3_wg42t"]
-[ext_resource type="Script" path="res://scripts/game/PlayerInfo.gd" id="4_xs52o"]
+[ext_resource type="Script" uid="uid://bxeri5g0sy2q7" path="res://scripts/game/PlayerInfo.gd" id="4_xs52o"]
 
 [sub_resource type="Resource" id="Resource_6u0o3"]
 script = ExtResource("4_xs52o")
