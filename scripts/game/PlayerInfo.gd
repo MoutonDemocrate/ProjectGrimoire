@@ -16,11 +16,16 @@ class_name PlayerInfo
 
 @export var deck : Deck = Deck.DEFAULT_DECK
 
-static var DEFAULT : PlayerInfo = PlayerInfo.from_dict({
-	"name" : "Wizard",
-	"host" : false,
-	"player_title" : "Apprentice"
-})
+func _init(
+	b_host:bool=false,
+	b_name:String="Player",
+	b_title:String="Apprentice",
+	b_deck:Deck=Deck.DEFAULT_DECK
+	) :
+	host = b_host
+	player_name = b_name
+	player_title = b_title
+	deck = b_deck
 
 ## Parses PlayerInfo to Dictionnary
 func to_dict() -> Dictionary :
@@ -34,6 +39,7 @@ func to_dict() -> Dictionary :
 ## Parses Dictionnary to PlayerInfo
 static func from_dict(dict : Dictionary) -> PlayerInfo :
 	var info : PlayerInfo = PlayerInfo.new()
+	print(dict["player_name"])
 	info.player_name = dict["player_name"] if "player_name" in dict.keys() else "Unnamed Player"
 	info.host = dict["host"] if "host" in dict.keys() else false
 	info.player_title = dict["player_title"] if "player_title" in dict.keys() else "Apprentice"

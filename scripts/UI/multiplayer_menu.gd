@@ -10,13 +10,25 @@ class_name MultiplayerMenu
 
 var peer := ENetMultiplayerPeer.new()
 
-var player_span_array : Array[PlayerSpan] = []
+var players : Dictionary[int,PlayerInfo] = {}
+
+func update_player_info(id:int,new_info:PlayerInfo) -> void:
+	print("("+str(multiplayer.get_unique_id())+") Adding id \""+ str(id)+"\" with info ",new_info.to_string())
+	players[id] = new_info
+	if str(id) in room_menu.player_list.get_children().map(func (node:Node): return node.name) :
+		# If ID in player info list
+		(room_menu.player_list.get_node(str(id)) as PlayerSpan).player_info = new_info
+	else :
+		# If ID is NOT in player info list 
+		var span := PlayerSpan.DEFAULT_SPAN_SCENE.instantiate()
+		span.name = str(id)
+		room_menu.player_list.add_child(span)
+		span.player_info = new_info
 
 func _ready() -> void:
 	multiplayer.allow_object_decoding = true
 	host_panel.create_room.connect(_on_host_pressed)
 	join_panel.join_room.connect(_on_join_pressed)
-
 
 func _on_host_pressed(room_name:String, password:String, port:int) -> void:
 	var room_info := RoomMenu.RoomInfo.new()
@@ -37,14 +49,17 @@ func _on_host_pressed(room_name:String, password:String, port:int) -> void:
 	room_menu.room_info = room_info
 	room_menu.vbox_room_settings.set_multiplayer_authority(1,true)
 	tabcont_base.current_tab = 1
-	var player_span : PlayerSpan = PlayerSpan.DEFAULT_SPAN_SCENE.instantiate()
-	room_menu.player_list.add_child(player_span)
-	player_span_array.append(player_span)
-	player_span.set_multiplayer_authority(1,true)
-	player_span.player_info.host = true
-	player_span.player_info.deck = Deck.DEFAULT_DECK
-	player_span.player_info.player_name = "Hostman"
-	player_span.player_info.player_title = "The Dev"
+
+	update_player_info(
+		multiplayer.get_unique_id(),
+		PlayerInfo.new(
+			true,
+			"Serverman",
+			"The Host",
+			Deck.DEFAULT_DECK
+		)
+	)
+	
 	print("Server created.")
 
 func _on_join_pressed(ip:String,port:int) -> void :
@@ -61,45 +76,51 @@ func _on_join_pressed(ip:String,port:int) -> void :
 
 func on_peer_connected(id : int) -> void :
 	print("("+str(multiplayer.get_unique_id())+") Peer Connected ! Name's ",id)
-	var player_span : PlayerSpan = PlayerSpan.DEFAULT_SPAN_SCENE.instantiate()
-	room_menu.player_list.add_child(player_span)
-	player_span_array.append(player_span)
-	player_span.set_multiplayer_authority(id,true)
-	player_span.player_info.host = false
-	player_span.player_info.deck = Deck.DEFAULT_DECK
-	player_span.player_info.player_name = "Player"
-	player_span.player_info.player_title = "Apprentice"
 
 func on_peer_disconnected() -> void:
 	print("("+str(multiplayer.get_unique_id())+") Peer disconnected!")
 
 func on_connected_to_server() -> void:
 	print("("+str(multiplayer.get_unique_id())+") Connected to server!")
-	ask_room_info.rpc_id(1)
+	ask_room_info_and_players.rpc_id(1)
+	var id := multiplayer.get_unique_id()
+	update_player_info(id, PlayerInfo.new())
+	give_player_info.rpc({id: players[id].to_dict()})
 
 func on_connection_failed() -> void:
 	print("("+str(multiplayer.get_unique_id())+") Connection failed!")
 
 func on_server_disconnected() -> void:
-	print_debug("("+str(multiplayer.get_unique_id())+") Server disconnected!")
+	print("("+str(multiplayer.get_unique_id())+") Server disconnected!")
 
 ## Used by clients to ask the server to send them the room's information.
 @rpc("any_peer", "reliable")
-func ask_room_info() -> void:
+func ask_room_info_and_players() -> void:
 	if multiplayer.is_server():
 		var asker := multiplayer.get_remote_sender_id()
 		give_room_info.bind(room_menu.room_info.to_dict()).rpc_id(asker)
+		var players_dict : Dictionary[int,Dictionary]
+		for id in players.keys() :
+			players_dict[id] = players[id].to_dict()
+		give_players_info.bind(players_dict).rpc_id(asker)
 
 ## Used by the server to answer a client's [method ask_room_info]'s demand.
 @rpc("authority", "reliable")
 func give_room_info(info:Dictionary) -> void:
-	print_debug("("+str(multiplayer.get_unique_id())+") Server sent info : ", info)
+	print("("+str(multiplayer.get_unique_id())+") Server sent info : ", info)
 	room_menu.room_info = RoomMenu.RoomInfo.from_dict(info)
+
+## Used by the server to answer a client's [method ask_room_info]'s demand.
+@rpc("authority", "reliable")
+func give_players_info(players_info:Dictionary) -> void:
+	print("("+str(multiplayer.get_unique_id())+") Server sent players : ", players_info)
+	for id in players_info.keys() :
+		update_player_info(id,PlayerInfo.from_dict(players_info[id]))
 
 ## Used by clients to send player info to everyone else.
 @rpc("any_peer", "call_remote", "reliable")
 func give_player_info(info:Dictionary) -> Error :
-	# TO ALL CLIENTS
-	# HERE IS A PLAYER'S INFODICT, CREATE A SPAN
-	print_debug("("+str(multiplayer.get_unique_id())+") Client sent playerinfo : ", info)
+	print("("+str(multiplayer.get_unique_id())+") Client sent playerinfo : ", info)
+	var sender := multiplayer.get_remote_sender_id()
+	update_player_info(sender, PlayerInfo.from_dict(info))
 	return OK

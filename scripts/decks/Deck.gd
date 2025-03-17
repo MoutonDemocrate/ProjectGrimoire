@@ -1,7 +1,7 @@
 extends Resource
 class_name Deck
 
-const DEFAULT_DECK : Resource = preload("res://scripts/decks/DefaultDeck.tres")
+static var DEFAULT_DECK : Resource = preload("res://scripts/decks/DefaultDeck.tres")
 
 @export var name: String = "Default Deck"
 @export_multiline var description: String = "This is the default MC Wizards deck. Try it out in a match!"
@@ -69,5 +69,5 @@ static func from_dict(dict : Dictionary) -> Deck :
 	deck.name = dict["name"] if "name" in dict.keys() else "Unnamed Deck"
 	deck.description = dict["description"] if "description" in dict.keys() else "No description."
 	deck.max_size = dict["max_size"] if "max_size" in dict.keys() else 15
-	deck.spells = ((dict["spells"] as Array[String]).map(func(el):return Spell.from_id(el))) if "spells" in dict.keys() else []
+	deck.spells = []#(((dict["spells"] as Array[String]).map(func(el):return Spell.from_id(el))) if "spells" in dict.keys() else []) as Array[Spell]
 	return deck
