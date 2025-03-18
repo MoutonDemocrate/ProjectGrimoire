@@ -8,7 +8,22 @@
 resource_name = "PanelCointainerChat"
 script/source = "extends PanelContainer
 
-#@onready var vbox_chat : VBoxContainer = $VBoxContainer/ScrollContainerChat/VBoxChat
+@onready var chat_label : Label = $VBoxContainer/PanelContainer/ScrollContainerChat/Label
+@onready var line_edit : LineEdit = $VBoxContainer/HBoxChatLine/LineEdit
+@onready var send_button : Button = $VBoxContainer/HBoxChatLine/Button
+
+var player_name : String = \"ERRORED_USERNAME\"
+
+@rpc(\"any_peer\",\"call_local\",\"reliable\")
+func add_message(by:String, message:String) -> void :
+	chat_label.text += \"\\n{0} : {1}\".format([by, message])
+
+func _ready() -> void :
+	send_button.pressed.connect(
+		func ():
+			add_message.bind(player_name,line_edit.text).rpc()
+			line_edit.text = \"\"
+	)
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pxqj"]
@@ -96,16 +111,10 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_0pxqj")
 
-[node name="VBoxChat" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/PanelContainer/ScrollContainerChat"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/PanelContainer/ScrollContainerChat"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/PanelContainer/ScrollContainerChat/VBoxChat"]
-layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.431373, 0.431373, 0.431373, 1)
-text = "There is nothing here... for now..."
 
 [node name="HBoxChatLine" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer"]
 layout_mode = 2
@@ -114,6 +123,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Send a message !"
+max_length = 100
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/PanelContainerChat/VBoxContainer/HBoxChatLine"]
 layout_mode = 2

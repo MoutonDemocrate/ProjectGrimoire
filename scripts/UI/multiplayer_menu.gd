@@ -40,6 +40,7 @@ func _on_host_pressed(room_name:String, password:String, port:int) -> void:
 	
 	peer.create_server(port)
 	multiplayer.multiplayer_peer = peer
+	PlayerData.player_name = "Hostman"
 	multiplayer.peer_connected.connect(on_peer_connected)
 	multiplayer.peer_disconnected.connect(on_peer_disconnected)
 	multiplayer.connected_to_server.connect(on_connected_to_server)
@@ -66,6 +67,7 @@ func _on_join_pressed(ip:String,port:int) -> void :
 	print("Connecting to server")
 	peer.create_client(ip, port)
 	multiplayer.multiplayer_peer = peer
+	PlayerData.player_name = "Player"
 	multiplayer.peer_connected.connect(on_peer_connected)
 	multiplayer.peer_disconnected.connect(on_peer_disconnected)
 	multiplayer.connected_to_server.connect(on_connected_to_server)
@@ -122,5 +124,5 @@ func give_players_info(players_info:Dictionary) -> void:
 func give_player_info(info:Dictionary) -> Error :
 	print("("+str(multiplayer.get_unique_id())+") Client sent playerinfo : ", info)
 	var sender := multiplayer.get_remote_sender_id()
-	update_player_info(sender, PlayerInfo.from_dict(info))
+	update_player_info(sender, PlayerInfo.from_dict(info[sender]))
 	return OK

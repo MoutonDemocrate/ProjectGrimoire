@@ -39,6 +39,7 @@ func to_dict() -> Dictionary :
 ## Parses Dictionnary to PlayerInfo
 static func from_dict(dict : Dictionary) -> PlayerInfo :
 	var info : PlayerInfo = PlayerInfo.new()
+	print(dict)
 	print(dict["player_name"])
 	info.player_name = dict["player_name"] if "player_name" in dict.keys() else "Unnamed Player"
 	info.host = dict["host"] if "host" in dict.keys() else false
