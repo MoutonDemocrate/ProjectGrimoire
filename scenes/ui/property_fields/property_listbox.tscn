@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://iae7mhe1kvkw"]
+
+[ext_resource type="Script" uid="uid://bkm6v5ihy35pi" path="res://scenes/ui/property_fields/PropertyListbox.gd" id="1_ubpf8"]
+[ext_resource type="Script" uid="uid://bxeri5g0sy2q7" path="res://scripts/game/PlayerInfo.gd" id="2_4kiyy"]
+
+[sub_resource type="Resource" id="Resource_qxhf4"]
+script = ExtResource("2_4kiyy")
+host = true
+player_name = "Player"
+player_title = "Apprentice"
+metadata/_custom_type_script = "uid://bxeri5g0sy2q7"
+
+[node name="PropertyListbox" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ubpf8")
+resource = SubResource("Resource_qxhf4")

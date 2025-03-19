@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://biqm6n8b73bon"]
+
+[ext_resource type="Script" uid="uid://bh1121ytt1xn" path="res://scenes/ui/property_fields/PropertyFieldLabel.gd" id="1_7tihc"]
+[ext_resource type="Theme" uid="uid://di6a1ou3v5pf0" path="res://assets/themes/menu_theme.tres" id="1_srmck"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7tihc"]
+
+[node name="PropertyFieldLabel" type="HBoxContainer"]
+offset_right = 836.0
+offset_bottom = 48.0
+script = ExtResource("1_7tihc")
+
+[node name="PropertyLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Property "
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+theme = ExtResource("1_srmck")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7tihc")
+vertical_scroll_mode = 0
+
+[node name="ValueLabel" type="Label" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value"
+horizontal_alignment = 2
