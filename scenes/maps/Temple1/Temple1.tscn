@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvu01gsv2rnl0"]
+[gd_scene load_steps=8 format=3 uid="uid://cvu01gsv2rnl0"]
 
 [ext_resource type="PackedScene" uid="uid://bf1k6n1623s7k" path="res://scenes/maps/Temple1/half_bloc_1.tscn" id="1_jmplx"]
+[ext_resource type="Script" uid="uid://bxhgg805l41va" path="res://scripts/game/Map.gd" id="1_k3saw"]
 [ext_resource type="PackedScene" uid="uid://susd41w26rsf" path="res://scenes/maps/Temple1/stairs_1.tscn" id="2_n6efw"]
+[ext_resource type="Texture2D" uid="uid://dkqcd7hot047h" path="res://assets/hdri/VerdantMoutains_Post.hdr" id="3_6vlpq"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_k3saw"]
+panorama = ExtResource("3_6vlpq")
+
+[sub_resource type="Sky" id="Sky_fvlor"]
+sky_material = SubResource("PanoramaSkyMaterial_k3saw")
+
+[sub_resource type="Environment" id="Environment_y0opf"]
+background_mode = 2
+sky = SubResource("Sky_fvlor")
 
 [node name="Temple1" type="Node3D"]
+script = ExtResource("1_k3saw")
 
 [node name="DestroyBody" parent="." instance=ExtResource("1_jmplx")]
 
@@ -19,17 +32,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 [node name="DestroyBody5" parent="." instance=ExtResource("1_jmplx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
+[node name="DestroyBody8" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="DestroyBody9" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="DestroyBody7" parent="." instance=ExtResource("1_jmplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
 [node name="DestroyBody6" parent="." instance=ExtResource("1_jmplx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
 
-[node name="DestroyBody" parent="DestroyBody6" instance=ExtResource("1_jmplx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+[node name="DestroyBody10" parent="." instance=ExtResource("2_n6efw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
 
-[node name="DestroyBody" parent="DestroyBody6/DestroyBody" instance=ExtResource("1_jmplx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
-[node name="DestroyBody2" parent="DestroyBody6/DestroyBody" instance=ExtResource("1_jmplx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-
-[node name="DestroyBody3" parent="DestroyBody6/DestroyBody" instance=ExtResource("2_n6efw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -8)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y0opf")

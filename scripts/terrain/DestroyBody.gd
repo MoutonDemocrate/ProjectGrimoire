@@ -1,3 +1,4 @@
+@tool
 extends StaticBody3D
 class_name DestroyBody
 
@@ -37,6 +38,12 @@ func damage(amount : float, from : Node3D) :
 		await get_tree().create_timer(1.0).timeout
 		recreate()
 
+@export_tool_button("Destroy !") var test_destroy = func () :
+	var node := Node3D.new()
+	node.look_at_from_position(self.global_position - 0.5*Vector3.UP, self.global_position + Vector3.UP + Vector3.LEFT*0.01)
+	self.add_child(node)
+	return destroy.bind(node)
+	
 
 func destroy(destroyer : Node3D):
 	mesh.hide()

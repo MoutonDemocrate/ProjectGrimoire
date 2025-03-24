@@ -6,7 +6,7 @@
 [ext_resource type="Material" uid="uid://j6uhv280dc3l" path="res://assets/models/terrain/materials/Ancient Rock.tres" id="4_hiqhc"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b6d2i"]
-points = PackedVector3Array(2, 2, -2, 2, -2, 2, -2, -2, 2, -2, 2, -2, -2, 2, -1.5, 2, 2, -1.5, 2, -2, 1, -2, -2, 1, 2, -1.5, 2, -2, -1.5, 2, 2, 1, -2, -2, 1, -2)
+points = PackedVector3Array(2, 2.5, -2, 2, -2, 2, -2, -2, 2, -2, 2.5, -2, 2, -2, 1, -2, -2, 1, 2, -1.5, 2, -2, -1.5, 2, 2, 1, -2, -2, 1, -2)
 
 [node name="DestroyBody" type="StaticBody3D"]
 collision_layer = 3
@@ -21,11 +21,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("ConvexPolygonShape3D_b6d2i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = ExtResource("3_xctyw")
 surface_material_override/0 = ExtResource("4_hiqhc")
